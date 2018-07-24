@@ -303,7 +303,7 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
 		vo.context = context;
 		vo.type = VOD_DATA;
 		//vo.requestUrl = VOD_TYPE + "&page=" + pageindex + "&pagesize="+ PAGESIZE + filter;
-		vo.requestUrl = VOD_TYPE + "&page=" + pageindex + filter;
+		vo.requestUrl = VOD_TYPE + "-p-" + pageindex + filter;
 		Logger.d("joychang","vo.requestUrl="+vo.requestUrl);
 		start = System.currentTimeMillis();
 		getDataFromServer(vo);
@@ -313,7 +313,6 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
 	 * 从服务器上获取数据，并回调处理
 	 * 
 	 * @param reqVo
-	 * @param callBack
 	 */
 	protected void getDataFromServer(RequestVo reqVo) {
 		showProgressDialog();
@@ -486,8 +485,7 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
     					Logger.v("joychang",
     							"vodtypeinfo" + vodtypeinfo.getPageindex() + "...."
     									+ vodtypeinfo.getVideonum());
-    					tv_type_details_sum.setText("共" + vodtypeinfo.getVideonum()
-    							+ "部");
+    					tv_type_details_sum.setText("共" + vodtypeinfo.getVideonum() + "部");
     					totalpage = vodtypeinfo.getTotalpage();
     					ArrayList<VodDataInfo> vodDatalist = (ArrayList<VodDataInfo>) response
     							.getData();

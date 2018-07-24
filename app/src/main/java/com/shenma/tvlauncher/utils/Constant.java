@@ -10,7 +10,8 @@ import android.os.Environment;
  *
  */
 public class Constant {
-	
+
+	public static String BASE_URL="http://ssvip.mybacc.com";
 	public static String UPDATE_URL = "http://www.smtvzm.com/index.php/version/chkupdate.json?";
 	public static String STARTINFO_URL = "http://www.smtvzm.com/index.php/user/addstartinfo.json?";
 	//public static String RECOMMEND_URL = "http://www.lepengbang.com/index.php/tjinfo/gettjinfo.json";
@@ -39,10 +40,10 @@ public class Constant {
 	public static final String ENTER_URL_MAC = "http://wlhd.lsott.com/api/index.php?mac=555666";
 	
 	//影视
-	public final static String TVPLAY = "http://aps.lsott.com/app/?nozzle=list&class=tvplay";
-	public final static String COMIC = "http://aps.lsott.com/app/?nozzle=list&class=comic";
-	public final static String TVSHOW = "http://aps.lsott.com/app/?nozzle=list&class=tvshow";
-	public final static String MOVIE = "http://aps.lsott.com/app/app.php?nozzle=list&class=movie";
+	public final static String TVPLAY = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-2";
+	public final static String COMIC = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-3";
+	public final static String TVSHOW = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-4";
+	public final static String MOVIE = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-1";
 	public final static String TEACH = "http://aps.lsott.com/app/app.php?nozzle=list&class=teach";
 	public final static String DOCUMENTARY = "http://aps.lsott.com/app/app.php?nozzle=list&class=documentary";
 	public final static String VODFILTER = "http://aps.lsott.com/app/app.php";

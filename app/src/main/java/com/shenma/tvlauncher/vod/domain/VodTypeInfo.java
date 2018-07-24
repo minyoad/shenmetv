@@ -1,70 +1,91 @@
 package com.shenma.tvlauncher.vod.domain;
 
+import android.graphics.Movie;
+
 import java.io.Serializable;
 import java.util.List;
 
 public class VodTypeInfo implements Serializable{
-	private int pageindex;
-	private int videonum;
-	private int totalpage;
-	private List<VodDataInfo> data;
 
+	public String status;
+
+	public Page page;
+	public List<CategoryData> list;
+	public List<VodDataInfo> data;
+
+	public static class Page{
+		public int pageindex;
+		public int pagecount;
+		public int pagesize;
+		public int recordcount;
+	}
+
+	public static class CategoryData{
+		public String list_id;
+		public String list_name;
+	}
+
+//	private int pageindex;
+//	private int videonum;
+//	private int totalpage;
+//	private List<VodDataInfo> data;
+//
 	public int getPageindex() {
-		return pageindex;
+		return page.pageindex;
 	}
 
-
-
-	public void setPageindex(int pageindex) {
-		this.pageindex = pageindex;
-	}
-
-
-
+//
+//
+//	public void setPageindex(int pageindex) {
+//		this.pageindex = pageindex;
+//	}
+//
+//
+//
 	public int getVideonum() {
-		return videonum;
+		return page.recordcount;
 	}
-
-
-
-	public void setVideonum(int videonum) {
-		this.videonum = videonum;
-	}
-
-
-
+//
+//
+//
+//	public void setVideonum(int videonum) {
+//		this.videonum = videonum;
+//	}
+//
+//
+//
 	public int getTotalpage() {
-		return totalpage;
+		return page.pagecount;
 	}
-
-
-
-	public void setTotalpage(int totalpage) {
-		this.totalpage = totalpage;
-	}
-
-
-
+//
+//
+//
+//	public void setTotalpage(int totalpage) {
+//		this.totalpage = totalpage;
+//	}
+//
+//
+//
 	public List<VodDataInfo> getData() {
 		return data;
 	}
-
-
-
-	public void setData(List<VodDataInfo> data) {
-		this.data = data;
-	}
-
-
-
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
-	@Override
-	public String toString() {
-		return "VodTypeInfo [pageindex=" + pageindex + ", videonum=" + videonum
-				+ ", totalpage=" + totalpage + ", data=" + data + "]";
-	}
+//
+//
+//
+//	public void setData(List<VodDataInfo> data) {
+//		this.data = data;
+//	}
+//
+//
+//
+//	/* (non-Javadoc)
+//	 * @see java.lang.Object#toString()
+//	 */
+//	@Override
+//	public String toString() {
+//		return "VodTypeInfo [pageindex=" + pageindex + ", videonum=" + videonum
+//				+ ", totalpage=" + totalpage + ", data=" + data + "]";
+//	}
 	
 }
 
