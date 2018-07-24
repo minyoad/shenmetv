@@ -37,13 +37,15 @@ public class VideoList implements Serializable{
 		mVodPlay=vod_play;
 		mVodUrl=vod_url;
 
+		parseUrl(mVodPlay,mVodUrl);
+
 	}
 
 	private void parseUrl(String vod_play,String vodUrl){
 		String[] playNameList=vod_play.split("\\$\\$\\$");
 		mPlaySrcList = Arrays.asList(playNameList);
 
-		String[] urlList=vod_play.split("\\$\\$\\$");
+		String[] urlList=vodUrl.split("\\$\\$\\$");
 
 		for (int i = 0; i< mPlaySrcList.size(); i++){
 			String name= mPlaySrcList.get(i);

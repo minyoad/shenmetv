@@ -480,68 +480,68 @@ public class VodDetailsActivity extends Activity {
 				switch (checkedId) {
 				case R.string.vod_qq:
 					now_source = qqs;
-					domain = "qq_com";
+					domain = "qq";
 					break;
 				case R.string.vod_letv:
 					now_source = letvs;
-					domain = "letv_com";
+					domain = "letv";
 					break;
 				case R.string.vod_youku:
 					now_source = youkus;
-					domain = "youku_com";
+					domain = "youku";
 					break;
 				case R.string.vod_sohu:
 					now_source = sohus;
-					domain = "sohu_com";
+					domain = "sohu";
 					break;
 				case R.string.vod_iqiyi:
 					now_source = iqiyis;
-					domain = "iqiyi_com";
+					domain = "iqiyi";
 					break;
 				case R.string.vod_kankan:
 					now_source = kankans;
-					domain = "kankan_com";
+					domain = "kankan";
 					break;
 				case R.string.vod_pptv:
 					now_source = pptvs;
-					domain = "pptv_com";
+					domain = "pptv";
 					break;
 				case R.string.vod_pps_tv:
 					now_source = pps_tvs;
-					domain = "pps_tv";
+					domain = "pps";
 					break;
 				case R.string.vod_funshion:
 					now_source = funshions;
-					domain = "funshion_com";
+					domain = "funshion";
 					break;
 				case R.string.vod_hunan:
 					now_source = hunans;
-					domain = "hunantv_com";
+					domain = "hunantv";
 					break;
 				case R.string.vod_cntv:
 					now_source = cntvs;
-					domain = "cntv_cn";
+					domain = "cntv";
 					break;
 				case R.string.vod_tudou:
 					now_source = tudous;
-					domain = "tudou_com";
+					domain = "tudou";
 					break;
 				case R.string.vod_baofeng:
 					now_source = baofengs;
-					domain = "baofeng_com";
+					domain = "baofeng";
 					break;
 				case R.string.vod_wasus:
 					now_source = wasus;
-					domain = "wasu_cn";
+					domain = "wasu";
 					break;
 					//电影端
 				case R.string.vod_m_pps:
 					now_source = mppss;
 					domain = "pps";
 					break;
-				case R.string.vod_m_yuku:
+				case R.string.vod_m_youku:
 					now_source = myukus;
-					domain = "yuku";
+					domain = "youku";
 					break;
 				case R.string.vod_m_fengxing:
 					now_source = mfengxings;
@@ -583,7 +583,7 @@ public class VodDetailsActivity extends Activity {
 					now_source = mwoles;
 					domain = "wole";
 					break;
-				case R.string.vod_m_qiyi:
+				case R.string.vod_m_iqiyi:
 					now_source = mqiyis;
 					domain = "qiyi";
 					break;
@@ -600,7 +600,14 @@ public class VodDetailsActivity extends Activity {
 					domain = "xunlei";
 					break;
 
+					default:
+						domain=videos.getPlaySrcList().get(0);
+						now_source=videos.getPlayUrlList(domain);
+
 				}
+
+//				now_source=videos.getPlayUrlList(domain);
+
 				//Logger.v(TAG, "rd=="+getString(checkedId)+"domain=="+domain);
 				if(vodtype.equals("MOVIE")&&now_source!=null && now_source.size()>1){
 					Logger.v(TAG, "now_source数量="+now_source.size());
@@ -633,303 +640,346 @@ public class VodDetailsActivity extends Activity {
 			rg_video_details_resources.removeAllViews();
 			//rg_video_details_resources.invalidate();
 		}
-		if(vodtype.equals("MOVIE")||vodtype.equals("DOCUMENTARY")||vodtype.equals("TEACH")){
-			//电影端
-			mtudous = videos.getTudou();
-			mqqs = videos.getQq();
-			mxunleis = videos.getXunlei();
-			mqiyis = videos.getQiyi();
-			msohus = videos.getSohu();
-			myukus = videos.getYuku();
-			mletvs = videos.getLetv();
-			mppss = videos.getPps();
-			mpptvs = videos.getPptv();
-			mbdwps = videos.getBdwp();
-			mcntvs = videos.getCntv_cn();
-			mm1905s = videos.getM1905();
-			mwoles = videos.getWole();
-			mfengxings = videos.getFengxing();
-			mtv189s = videos.getTv189();
-			mflvs = videos.getFlv();
-			
-			if (null != mletvs && mletvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_letv_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_letv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mqqs && mqqs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_qq_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_qq);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//		if(vodtype.equals("MOVIE")||vodtype.equals("DOCUMENTARY")||vodtype.equals("TEACH")){
 
-			}
-			if (null != mqiyis && mqiyis.size() > 0) {
+			List<String> playsrcList=videos.getPlaySrcList();
+			for (String playSrc:playsrcList){
 				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_iqiyi_selector);
 				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
 				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_qiyi);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != msohus && msohus.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_sohu_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_sohu);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != myukus && myukus.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_youku_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_yuku);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
+				switch (playSrc.toLowerCase()){
+					case "letv":
+						rb.setBackgroundResource(R.drawable.source_letv_selector);
+						rb.setId(R.string.vod_m_letv);
+						break;
+					case "youku":
+						rb.setBackgroundResource(R.drawable.source_youku_selector);
+						rb.setId(R.string.vod_m_youku);
+						break;
+					case "qq":
+						rb.setBackgroundResource(R.drawable.source_qq_selector);
+						rb.setId(R.string.vod_m_qq);
+						break;
+					case "pptv":
+						rb.setBackgroundResource(R.drawable.source_pptv_selector);
+						rb.setId(R.string.vod_m_pptv);
+						break;
+					case "iqiyi":
+						rb.setBackgroundResource(R.drawable.source_iqiyi_selector);
+						rb.setId(R.string.vod_m_iqiyi);
+						break;
+					case "sohu":
+						rb.setBackgroundResource(R.drawable.source_sohu_selector);
+						rb.setId(R.string.vod_m_sohu);
+						break;
+					case "cntv":
+						rb.setBackgroundResource(R.drawable.source_cntv_selector);
+						rb.setId(R.string.vod_m_cntv);
+						break;
+					case "mgtv":
+						rb.setBackgroundResource(R.drawable.source_other_selector);
+						rb.setId(R.string.vod_m_mgtv);
+						break;
+				}
 
-			if (null != mbdwps && mbdwps.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_bdyb_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_bdwp);
 				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
 			}
-			if (null != mflvs && mflvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_flv_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_flv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mcntvs && mcntvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_cntv_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_cntv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mfengxings && mfengxings.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_funshion_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_fengxing);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mxunleis && mxunleis.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_xunlei_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_xunlei);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mpptvs && mpptvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_pptv_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_pptv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mppss && mppss.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_pps_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_pps);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-
-			if (null != mm1905s && mm1905s.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_m1905_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_m1905);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-
-			if (null != mtudous && mtudous.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_tudou_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_tudou);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mwoles && mwoles.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_56_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_wole);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != mtv189s && mtv189s.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_tv189_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_tv189);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-
-		}else{
-			//电视剧、综艺、动漫、教育
-			tudous = videos.getTudou_com();
-			qqs = videos.getQq_com();
-			kankans = videos.getKankan_com();
-			iqiyis = videos.getIqiyi_com();
-			sohus = videos.getSohu_com();
-			youkus = videos.getYouku_com();
-			letvs = videos.getLetv_com();
-			pps_tvs = videos.getPps_tv();
-			pptvs = videos.getPptv_com();
-			baofengs = videos.getBaofeng_com();
-			cntvs = videos.getCntv_cn();
-			m1905s = videos.getM1905_com();
-			wasus = videos.getWasu_cn();
-			funshions = videos.getFunshion_com();
-			hunans = videos.getHunantv_com();
-			mwoles = videos.getWole();
-			if (null != youkus && youkus.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_youku_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_youku);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != letvs && letvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_letv_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_letv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			
-			if (null != iqiyis && iqiyis.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_iqiyi_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_iqiyi);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			
-			if (null != sohus && sohus.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_sohu_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_sohu);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-
-			if (null != pps_tvs && pps_tvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_pps_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_pps_tv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != qqs && qqs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_qq_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_qq);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-
-			}
-			if (null != cntvs && cntvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_cntv_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_cntv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != hunans && hunans.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_other_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_hunan);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-				
-			}
-
-			if (null != funshions && funshions.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_funshion_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_funshion);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != pptvs && pptvs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_pptv_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_pptv);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != kankans && kankans.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_xunlei_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_kankan);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != m1905s && m1905s.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_m1905_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_m_m1905);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != wasus && wasus.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_other_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_wasus);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != baofengs && baofengs.size() > 0) {
-				RadioButton rb = new RadioButton(this);
-				rb.setBackgroundResource(R.drawable.source_other_selector);
-				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-				rb.setPadding(0, 0, 0, 0);
-				rb.setId(R.string.vod_baofeng);
-				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
-			}
-			if (null != tudous && tudous.size() > 0) {
-					RadioButton rb = new RadioButton(this);
-					rb.setBackgroundResource(R.drawable.source_tudou_selector);
-					rb.setButtonDrawable(R.drawable.detailsource_bg_s);
-					rb.setPadding(0, 0, 0, 0);
-					rb.setId(R.string.vod_tudou);
-					rg_video_details_resources.addView(rb,rbWidth,rbHeigth);//84,30
-			}
-		}
+//			//电影端
+//			mtudous = videos.getTudou();
+//			mqqs = videos.getQq();
+//			mxunleis = videos.getXunlei();
+//			mqiyis = videos.getQiyi();
+//			msohus = videos.getSohu();
+//			myukus = videos.getYuku();
+//			mletvs = videos.getLetv();
+//			mppss = videos.getPps();
+//			mpptvs = videos.getPptv();
+//			mbdwps = videos.getBdwp();
+//			mcntvs = videos.getCntv_cn();
+//			mm1905s = videos.getM1905();
+//			mwoles = videos.getWole();
+//			mfengxings = videos.getFengxing();
+//			mtv189s = videos.getTv189();
+//			mflvs = videos.getFlv();
+//
+//			if (null != mletvs && mletvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_letv_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_letv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mqqs && mqqs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_qq_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_qq);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//
+//			}
+//			if (null != mqiyis && mqiyis.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_iqiyi_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_qiyi);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != msohus && msohus.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_sohu_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_sohu);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != myukus && myukus.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_youku_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_yuku);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//
+//			if (null != mbdwps && mbdwps.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_bdyb_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_bdwp);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mflvs && mflvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_flv_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_flv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mcntvs && mcntvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_cntv_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_cntv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mfengxings && mfengxings.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_funshion_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_fengxing);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mxunleis && mxunleis.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_xunlei_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_xunlei);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mpptvs && mpptvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_pptv_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_pptv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mppss && mppss.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_pps_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_pps);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//
+//			if (null != mm1905s && mm1905s.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_m1905_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_m1905);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//
+//			if (null != mtudous && mtudous.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_tudou_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_tudou);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mwoles && mwoles.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_56_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_wole);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != mtv189s && mtv189s.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_tv189_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_tv189);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//
+//		}else{
+//			//电视剧、综艺、动漫、教育
+//			tudous = videos.getTudou_com();
+//			qqs = videos.getQq_com();
+//			kankans = videos.getKankan_com();
+//			iqiyis = videos.getIqiyi_com();
+//			sohus = videos.getSohu_com();
+//			youkus = videos.getYouku_com();
+//			letvs = videos.getLetv_com();
+//			pps_tvs = videos.getPps_tv();
+//			pptvs = videos.getPptv_com();
+//			baofengs = videos.getBaofeng_com();
+//			cntvs = videos.getCntv_cn();
+//			m1905s = videos.getM1905_com();
+//			wasus = videos.getWasu_cn();
+//			funshions = videos.getFunshion_com();
+//			hunans = videos.getHunantv_com();
+//			mwoles = videos.getWole();
+//			if (null != youkus && youkus.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_youku_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_youku);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != letvs && letvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_letv_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_letv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//
+//			if (null != iqiyis && iqiyis.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_iqiyi_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_iqiyi);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//
+//			if (null != sohus && sohus.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_sohu_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_sohu);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//
+//			if (null != pps_tvs && pps_tvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_pps_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_pps_tv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != qqs && qqs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_qq_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_qq);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//
+//			}
+//			if (null != cntvs && cntvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_cntv_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_cntv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != hunans && hunans.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_other_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_hunan);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//
+//			}
+//
+//			if (null != funshions && funshions.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_funshion_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_funshion);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != pptvs && pptvs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_pptv_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_pptv);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != kankans && kankans.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_xunlei_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_kankan);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != m1905s && m1905s.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_m1905_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_m_m1905);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != wasus && wasus.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_other_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_wasus);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != baofengs && baofengs.size() > 0) {
+//				RadioButton rb = new RadioButton(this);
+//				rb.setBackgroundResource(R.drawable.source_other_selector);
+//				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//				rb.setPadding(0, 0, 0, 0);
+//				rb.setId(R.string.vod_baofeng);
+//				rg_video_details_resources.addView(rb,rbWidth,rbHeigth);
+//			}
+//			if (null != tudous && tudous.size() > 0) {
+//					RadioButton rb = new RadioButton(this);
+//					rb.setBackgroundResource(R.drawable.source_tudou_selector);
+//					rb.setButtonDrawable(R.drawable.detailsource_bg_s);
+//					rb.setPadding(0, 0, 0, 0);
+//					rb.setId(R.string.vod_tudou);
+//					rg_video_details_resources.addView(rb,rbWidth,rbHeigth);//84,30
+//			}
+//		}
 		
 		if(rg_video_details_resources.getChildCount()>0){
 			Logger.d(TAG, "rg_video_details_resources.getChildCount()==="+rg_video_details_resources.getChildCount());
@@ -1098,7 +1148,7 @@ public class VodDetailsActivity extends Activity {
     					}
 
     				}
-//    				fillRadioGroup();
+    				fillRadioGroup();
     				gv_recommend_grid.setAdapter(vodDetailsAdapter); // 为界面填充数据
     				gv_recommend_grid.setOnItemClickListener(new OnItemClickListener() {
 

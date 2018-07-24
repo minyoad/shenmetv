@@ -48,6 +48,7 @@ public class VideoDetailInfo {
 	public String vod_url;
 	public String vod_director;
 	public String vod_area;
+	public String vod_play;
 
 	public AboutInfo getAbout() {
 		return about;
@@ -58,15 +59,19 @@ public class VideoDetailInfo {
 	}
 
 	public String[] getActor() {
-		return vod_actor==null?null: vod_actor.split(",/");
+		return vod_actor==null?null: vod_actor.split("[,/]");
 	}
 
+//	private String[] split(String src){
+//		String[] seperators={","};
+//		return src.split(seperators);
+//	}
 //	public void setActor(String[] actor) {
 //		this.actor = actor;
 //	}
 
 	public String[] getDirector() {
-		return vod_director==null?null:vod_director.split(",/");
+		return vod_director==null?null:vod_director.split("[,/]");
 	}
 
 //	public void setDirector(String[] director) {
@@ -90,6 +95,9 @@ public class VideoDetailInfo {
 	}
 
 	public VideoList getVideolist() {
+		if (videolist==null){
+			videolist=new VideoList(vod_play,vod_url);
+		}
 		return videolist;
 	}
 

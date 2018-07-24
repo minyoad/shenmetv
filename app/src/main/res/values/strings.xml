@@ -231,14 +231,16 @@
     <string name="vod_m_pptv">m_pptv</string>
     <string name="vod_m_tudou">m_tudou</string>
     <string name="vod_m_m1905">m_m1905</string>
-    <string name="vod_m_qiyi">m_qiyi</string>
-    <string name="vod_m_yuku">m_yuku</string>
+    <string name="vod_m_iqiyi">m_iqiyi</string>
+    <string name="vod_m_youku">m_youku</string>
     <string name="vod_m_xunlei">m_xunlei</string>
     <string name="vod_m_bdwp">m_bdwp</string>
     <string name="vod_m_flv">m_flv</string>
     <string name="vod_m_letv">m_letv</string>
     <string name="vod_m_wole">m_wole</string>
     <string name="vod_m_cntv">m_cntv</string>
+    <string name="vod_m_mgtv">m_mgtv</string>
+
     <string name="vod_onpressed_play_next">再按一次播放下一集</string>
     <string name="vod_onpressed_play_frist">已经是第一集了！！！</string>
     <string name="vod_onpressed_play_last">再按一次播放上一集</string>
