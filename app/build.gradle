@@ -1,0 +1,32 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 21
+    buildToolsVersion "27.0.3"
+
+    defaultConfig {
+        applicationId "com.shenma.tvlauncher"
+        minSdkVersion 11
+        targetSdkVersion 15
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
+        }
+    }
+}
+
+dependencies {
+    compile 'com.android.support:support-v4:21.0.3'
+    compile 'com.google.code.gson:gson:2.2.4'
+    compile files('libs/AndroidHttpServer-1.0.3.jar')
+    compile files('libs/afinal-0.3.32-bin.jar')
+    compile files('libs/cyberplayer-sdk.jar')
+    compile files('libs/lisenencoder.jar')
+    compile files('libs/shenma.jar')
+    compile files('libs/umeng-sdk.jar')
+    compile files('libs/universal-image-loader-1.8.6.jar')
+    compile files('libs/volley.jar')
+}
