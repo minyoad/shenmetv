@@ -1,9 +1,96 @@
 package com.shenma.tvlauncher.vod.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class VideoList implements Serializable{
+
+	public HashMap<String, List> getPlayUrlMap() {
+		return mPlayUrlMap;
+	}
+
+	public List<String> getPlaySrcList() {
+		return mPlaySrcList;
+	}
+
+	public List<VodUrl> getPlayUrlList(String srcName){
+		if (srcName!=null && mPlayUrlMap!=null && mPlaySrcList!=null && mPlayUrlMap.containsKey(srcName)){
+			return mPlayUrlMap.get(srcName);
+		}
+		return null;
+	}
+
+	private HashMap<String,List> mPlayUrlMap;
+	private List<String> mPlaySrcList;
+
+	private String mVodPlay;
+	private String mVodUrl;
+
+	public VideoList(String vod_play,String vod_url){
+		if(mPlayUrlMap==null){
+			mPlayUrlMap=new HashMap<>();
+		}
+		mVodPlay=vod_play;
+		mVodUrl=vod_url;
+
+	}
+
+	private void parseUrl(String vod_play,String vodUrl){
+		String[] playNameList=vod_play.split("\\$\\$\\$");
+		mPlaySrcList = Arrays.asList(playNameList);
+
+		String[] urlList=vod_play.split("\\$\\$\\$");
+
+		for (int i = 0; i< mPlaySrcList.size(); i++){
+			String name= mPlaySrcList.get(i);
+
+			String urlStr=urlList[i];
+
+			String[] NameUrls=urlStr.split("\\r");
+
+
+			ArrayList<VodUrl> urlLists=new ArrayList<>();
+			for(String nameurl:NameUrls){
+
+				String[] infos= nameurl.split("\\$");
+
+				VodUrl playUrlInfo=new VodUrl();
+
+				if(infos.length>1) {
+					playUrlInfo.setTitle(generateUrlName(infos[0]));
+					playUrlInfo.setUrl(infos[1]);
+				}
+				else{
+					playUrlInfo.setTitle(name);
+					playUrlInfo.setUrl(infos[0]);
+				}
+
+				urlLists.add(playUrlInfo);
+
+			}
+
+			mPlayUrlMap.put(name,urlLists);
+
+		}
+	}
+	private String generateUrlName(String origName){
+		if (isNumeric(origName)){
+			return "第"+origName+"集";
+		}
+		else{
+			return origName;
+		}
+	}
+	public static boolean isNumeric(String str){
+		Pattern pattern = Pattern.compile("[0-9]*");
+		return pattern.matcher(str).matches();
+	}
+
+
 	private List<VodUrl> letv_com;
 	private List<VodUrl> pps_tv;
 	private List<VodUrl> pptv_com;

@@ -3,18 +3,18 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 21
     buildToolsVersion "27.0.3"
-
     defaultConfig {
         applicationId "com.shenma.tvlauncher"
-        minSdkVersion 11
+        minSdkVersion 15
         targetSdkVersion 15
     }
-
     buildTypes {
         release {
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-project.txt'
         }
+    }
+    productFlavors {
     }
 }
 

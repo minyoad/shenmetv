@@ -1,5 +1,8 @@
 package com.shenma.tvlauncher.vod.domain;
 
+import com.google.gson.annotations.SerializedName;
+import com.shenma.tvlauncher.utils.Constant;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
@@ -10,17 +13,25 @@ import java.util.Map;
  * 
  */
 public class VideoDetailInfo {
-
+	@SerializedName("vod_id")
 	private String id;// vodID
+	@SerializedName("vod_name")
+
 	private String title;// 语言
 	private String trunk;
+	@SerializedName("vod_pic")
 	private String img_url;// 海报地址
+	@SerializedName("vod_content")
 	private String intro;// 介绍
 	private String is_finish;
+	@SerializedName("vod_year")
 	private String pubtime;// 上映年份
+	@SerializedName("vod_continu")
 	private String cur_episode;// 更新集数
+	@SerializedName("vod_total")
 	private String max_episode;// 总集数
 	private String season_num;
+	@SerializedName("vod_gold")
 	private String raing;
 	private String play_filter;
 	private String foreign_ip;
@@ -31,6 +42,13 @@ public class VideoDetailInfo {
 	private AboutInfo about;
 	private VideoList videolist;
 
+	public String vod_type;
+	public String vod_keywords;
+	public String vod_actor;
+	public String vod_url;
+	public String vod_director;
+	public String vod_area;
+
 	public AboutInfo getAbout() {
 		return about;
 	}
@@ -40,31 +58,31 @@ public class VideoDetailInfo {
 	}
 
 	public String[] getActor() {
-		return actor;
+		return vod_actor==null?null: vod_actor.split(",/");
 	}
 
-	public void setActor(String[] actor) {
-		this.actor = actor;
-	}
+//	public void setActor(String[] actor) {
+//		this.actor = actor;
+//	}
 
 	public String[] getDirector() {
-		return director;
+		return vod_director==null?null:vod_director.split(",/");
 	}
 
-	public void setDirector(String[] director) {
-		this.director = director;
-	}
+//	public void setDirector(String[] director) {
+//		this.director = director;
+//	}
 
 	public String[] getArea() {
-		return area;
+		return vod_area==null?null: vod_area.split(",");
 	}
 
-	public void setArea(String[] area) {
-		this.area = area;
-	}
+//	public void setArea(String[] area) {
+//		this.area = area;
+//	}
 
 	public String[] getType() {
-		return type;
+		return vod_type==null?null:vod_type.split(",");
 	}
 
 	public void setType(String[] type) {
@@ -75,9 +93,9 @@ public class VideoDetailInfo {
 		return videolist;
 	}
 
-	public void setVideolist(VideoList videolist) {
-		this.videolist = videolist;
-	}
+//	public void setVideolist(VideoList videolist) {
+//		this.videolist = videolist;
+//	}
 
 	public String getId() {
 		return id;
@@ -110,6 +128,9 @@ public class VideoDetailInfo {
 	}
 
 	public String getImg_url() {
+		if (!img_url.startsWith("http")){
+			return Constant.BASE_URL+img_url;
+		}
 		return img_url;
 	}
 

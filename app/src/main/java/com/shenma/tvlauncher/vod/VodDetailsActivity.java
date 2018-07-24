@@ -40,6 +40,7 @@ import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.shenma.tvlauncher.R;
 import com.shenma.tvlauncher.network.GsonRequest;
+import com.shenma.tvlauncher.utils.Constant;
 import com.shenma.tvlauncher.utils.ImageUtil;
 import com.shenma.tvlauncher.utils.Logger;
 import com.shenma.tvlauncher.utils.Utils;
@@ -55,6 +56,7 @@ import com.shenma.tvlauncher.vod.domain.VideoDetailInfo;
 import com.shenma.tvlauncher.vod.domain.VideoInfo;
 import com.shenma.tvlauncher.vod.domain.VideoList;
 import com.shenma.tvlauncher.vod.domain.VodDataInfo;
+import com.shenma.tvlauncher.vod.domain.VodDetailTypeInfo;
 import com.shenma.tvlauncher.vod.domain.VodUrl;
 public class VodDetailsActivity extends Activity {
 
@@ -125,6 +127,7 @@ public class VodDetailsActivity extends Activity {
 	 */
 	private void initData() {
 		Intent intent = getIntent();
+		vodId=intent.getLongExtra("vodId",0);
 		vodtype = intent.getStringExtra("vodtype");
 		vodstate = intent.getStringExtra("vodstate");
 		nextlink = intent.getStringExtra("nextlink");
@@ -960,7 +963,7 @@ public class VodDetailsActivity extends Activity {
 		RequestVo vo = new RequestVo();
 		vo.context = context;
 		if (null != nextlink) {
-			vo.requestUrl = nextlink;
+			vo.requestUrl = Constant.VOD_DETAIL+vodId;
 			Logger.v(TAG, "访问:::" + nextlink);
 			getDataFromServer(vo);
 		}
@@ -970,23 +973,27 @@ public class VodDetailsActivity extends Activity {
 	 * 从服务器上获取数据，并回调处理
 	 * 
 	 * @param reqVo
-	 * @param callBack
 	 */
 	protected void getDataFromServer(RequestVo reqVo) {
 		showProgressDialog();
 		mQueue = Volley.newRequestQueue(context, new HurlStack());
 		if(Utils.hasNetwork(context)){
-			GsonRequest<VideoDetailInfo> mVodData = new GsonRequest<VideoDetailInfo>(Method.GET, reqVo.requestUrl,
-					VideoDetailInfo.class,createVodDataSuccessListener(),createVodDataErrorListener());
+			GsonRequest<VodDetailTypeInfo> mVodData = new GsonRequest<VodDetailTypeInfo>(Method.GET, reqVo.requestUrl,
+					VodDetailTypeInfo.class,createVodDataSuccessListener(),createVodDataErrorListener());
 			mQueue.add(mVodData); 
 		}
 	}
 	
 	//影视详细数据请求成功
-    private Response.Listener<VideoDetailInfo> createVodDataSuccessListener() {
-        return new Response.Listener<VideoDetailInfo>() {
+    private Response.Listener<VodDetailTypeInfo> createVodDataSuccessListener() {
+        return new Response.Listener<VodDetailTypeInfo>() {
             @Override
-            public void onResponse(VideoDetailInfo paramObject) {
+            public void onResponse(VodDetailTypeInfo typeInfo) {
+            	VideoDetailInfo paramObject=null;
+            	if (typeInfo!=null){
+            		paramObject=typeInfo.getData().get(0);
+				}
+
     			if (null != paramObject) {
     				vodname = paramObject.getTitle();
     				videoId = paramObject.getId();
@@ -1091,7 +1098,7 @@ public class VodDetailsActivity extends Activity {
     					}
 
     				}
-    				fillRadioGroup();
+//    				fillRadioGroup();
     				gv_recommend_grid.setAdapter(vodDetailsAdapter); // 为界面填充数据
     				gv_recommend_grid.setOnItemClickListener(new OnItemClickListener() {
 
@@ -1172,6 +1179,7 @@ public class VodDetailsActivity extends Activity {
 
 	private final String TAG = "VodDetailsActivity";
 	private DisplayImageOptions options;
+	private long vodId;
 	private String nextlink = null;
 	private String vodtype = null;
 	private String vodstate = null;

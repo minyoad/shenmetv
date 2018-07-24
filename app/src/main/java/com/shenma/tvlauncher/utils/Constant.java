@@ -48,6 +48,7 @@ public class Constant {
 	public final static String DOCUMENTARY = "http://aps.lsott.com/app/app.php?nozzle=list&class=documentary";
 	public final static String VODFILTER = "http://aps.lsott.com/app/app.php";
 	public final static String VODFILTER_H123 = "http://aps.lsott.com/app/";
+	public final static String VOD_DETAIL=BASE_URL+"/index.php?s=plus-api-json-vodids-";
 	
 	//专题
 	public final static String TOPIC_URL = "http://www.smtvzm.com/index.php/tjinfo/getyszt.json";
