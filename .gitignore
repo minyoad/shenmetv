@@ -71,5 +71,6 @@ fastlane/readme.md
 ### Android Patch ###
 gen-external-apklibs
 
+.DS_Store
 
 # End of https://www.gitignore.io/api/android

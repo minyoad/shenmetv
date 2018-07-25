@@ -27,7 +27,7 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
         initData();
 
         VideoInfo videoInfo=videoInfoList.get(playIndex);
-        play(videoInfo.url,videoInfo.title,"");
+        play(videoInfo.url,vodname, videoInfo.title);
 
     }
 
