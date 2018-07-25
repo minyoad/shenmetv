@@ -4,6 +4,8 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/shenmatv1.iml" filepath="$PROJECT_DIR$/shenmatv1.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xwalk_core_library/xwalk_core_library.iml" filepath="$PROJECT_DIR$/xwalk_core_library/xwalk_core_library.iml" />
+      <module fileurl="file://$PROJECT_DIR$/xwalkvideoplayer/xwalkvideoplayer.iml" filepath="$PROJECT_DIR$/xwalkvideoplayer/xwalkvideoplayer.iml" />
     </modules>
   </component>
 </project>

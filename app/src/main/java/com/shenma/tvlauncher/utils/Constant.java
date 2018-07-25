@@ -12,6 +12,8 @@ import android.os.Environment;
 public class Constant {
 
 	public static String BASE_URL="http://ssvip.mybacc.com";
+
+	public static String VIP_PROXY_URL="https://beaacc.com/api.php?url=";
 	public static String UPDATE_URL = "http://www.smtvzm.com/index.php/version/chkupdate.json?";
 	public static String STARTINFO_URL = "http://www.smtvzm.com/index.php/user/addstartinfo.json?";
 	//public static String RECOMMEND_URL = "http://www.lepengbang.com/index.php/tjinfo/gettjinfo.json";

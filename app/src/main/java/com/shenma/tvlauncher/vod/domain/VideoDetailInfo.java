@@ -113,12 +113,6 @@ public class VideoDetailInfo {
 		this.id = id;
 	}
 
-	// public VideoList getVideolist() {
-	// return videolist;
-	// }
-	// public void setVideolist(VideoList videolist) {
-	// this.videolist = videolist;
-	// }
 	public String getTitle() {
 		return title;
 	}

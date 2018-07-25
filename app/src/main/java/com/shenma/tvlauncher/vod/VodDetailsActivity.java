@@ -238,7 +238,7 @@ public class VodDetailsActivity extends Activity {
 				}
 				if(null!=videoinfo&&videoinfo.size()>0){
 					Intent intent = null;
-					intent = new Intent(VodDetailsActivity.this,VideoPlayerActivity.class);
+					intent = new Intent(VodDetailsActivity.this,WebVideoPlayerActivity.class);
 //					if(null!=domain && domain.contains("pps")||domain.contains("qiyi")){
 //						intent = new Intent(VodDetailsActivity.this,MeidaActivity.class);
 //					}else{
@@ -305,7 +305,7 @@ public class VodDetailsActivity extends Activity {
 //					}else{
 //						intent = new Intent(VodDetailsActivity.this,VideoPlayerActivity.class);
 //					}		
-					intent = new Intent(VodDetailsActivity.this,VideoPlayerActivity.class);
+					intent = new Intent(VodDetailsActivity.this,WebVideoPlayerActivity.class);
 					intent.putParcelableArrayListExtra("videoinfo",videoinfo);//数据集合
 					intent.putExtra("albumPic",albumPic);//图片路径
 					intent.putExtra("vodtype", vodtype);//影片类型
