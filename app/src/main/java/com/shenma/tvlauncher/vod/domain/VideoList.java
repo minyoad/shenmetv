@@ -1,5 +1,7 @@
 package com.shenma.tvlauncher.vod.domain;
 
+import com.shenma.tvlauncher.utils.Constant;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -92,6 +94,15 @@ public class VideoList implements Serializable{
 		return pattern.matcher(str).matches();
 	}
 
+	public static String getProxiedUrl(String vodUrl){
+		String vips[]={"qq","youku","mgtv","sohu","letv","pptv","iqiyi","wasu","baofeng","kankan"};
+		for (String vip:vips){
+			if (vodUrl.contains(vip)){
+				return Constant.VIP_PROXY_URL+vodUrl;
+			}
+		}
+		return vodUrl;
+	}
 
 	private List<VodUrl> letv_com;
 	private List<VodUrl> pps_tv;

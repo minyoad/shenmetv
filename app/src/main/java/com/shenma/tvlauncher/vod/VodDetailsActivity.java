@@ -602,11 +602,11 @@ public class VodDetailsActivity extends Activity {
 
 					default:
 						domain=videos.getPlaySrcList().get(0);
-						now_source=videos.getPlayUrlList(domain);
+//						now_source=videos.getPlayUrlList(domain);
 
 				}
 
-//				now_source=videos.getPlayUrlList(domain);
+				now_source=videos.getPlayUrlList(domain);
 
 				//Logger.v(TAG, "rd=="+getString(checkedId)+"domain=="+domain);
 				if(vodtype.equals("MOVIE")&&now_source!=null && now_source.size()>1){

@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import com.mybacc.xwalkvideoplayer.XwalkWebViewActivity;
 import com.shenma.tvlauncher.vod.domain.VideoInfo;
+import com.shenma.tvlauncher.vod.domain.VideoList;
 
 import java.util.ArrayList;
 
@@ -27,7 +28,10 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
         initData();
 
         VideoInfo videoInfo=videoInfoList.get(playIndex);
-        play(videoInfo.url,vodname, videoInfo.title);
+
+
+        String url= VideoList.getProxiedUrl(videoInfo.url);
+        play(url,vodname, videoInfo.title);
 
     }
 
