@@ -8,7 +8,19 @@ import java.util.List;
  *
  */
 public class VodFilter implements Serializable{
-	
+
+	public String status;
+	public List<Category> data;
+
+	public Category getCategoryById(int listid){
+		for(Category category:data){
+			if (category.list_id.equals(String.valueOf(listid)))
+				return category;
+		}
+		return null;
+	}
+
+
 	private List<VodFilterInfo> tvplay;
 	private List<VodFilterInfo> comic;
 	private List<VodFilterInfo> tvshow;

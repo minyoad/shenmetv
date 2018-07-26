@@ -141,32 +141,6 @@ public abstract class XwalkWebViewActivity extends Activity implements VideoPlay
 
         XWalkView mWalkView;
 
-//        private void pause() {
-//            String js = "javascript:getVideo().pause();";
-//
-//            mWalkView.loadUrl(js);
-//        }
-//
-//        private void forward() {
-//            String js = "javascript:getVideo().pause();getVideo().currentTime+=10;getVideo().play()";
-//            mWalkView.loadUrl(js);
-//        }
-//
-//        private void backward() {
-//            String js = "javascript:getVideo().pause();getVideo().currentTime-=10;getVideo().play()";
-//            mWalkView.loadUrl(js);
-//        }
-//
-//        private void play() {
-//            String js = "javascript:getVideo().play();";
-//            mWalkView.loadUrl(js);
-//        }
-//
-//        private void muted(){
-//            String js = "javascript:getVideo().muted=true;";
-//            mWalkView.loadUrl(js);
-//        }
-
         MyUIClient(XWalkView view) {
             super(view);
             mWalkView = view;

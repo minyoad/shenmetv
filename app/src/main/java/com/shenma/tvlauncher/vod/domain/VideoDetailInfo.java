@@ -59,7 +59,7 @@ public class VideoDetailInfo {
 	}
 
 	public String[] getActor() {
-		return vod_actor==null?null: vod_actor.split("[,/]");
+		return vod_actor==null?null: vod_actor.split(",|/");
 	}
 
 //	private String[] split(String src){
@@ -71,7 +71,7 @@ public class VideoDetailInfo {
 //	}
 
 	public String[] getDirector() {
-		return vod_director==null?null:vod_director.split("[,/]");
+		return vod_director==null?null:vod_director.split(",|/");
 	}
 
 //	public void setDirector(String[] director) {

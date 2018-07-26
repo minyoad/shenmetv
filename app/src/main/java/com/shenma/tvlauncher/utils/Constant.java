@@ -48,10 +48,12 @@ public class Constant {
 	public final static String MOVIE = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-1";
 	public final static String TEACH = "http://aps.lsott.com/app/app.php?nozzle=list&class=teach";
 	public final static String DOCUMENTARY = "http://aps.lsott.com/app/app.php?nozzle=list&class=documentary";
-	public final static String VODFILTER = "http://aps.lsott.com/app/app.php";
-	public final static String VODFILTER_H123 = "http://aps.lsott.com/app/";
+	public final static String VODFILTER = BASE_URL+"/index.php?s=plus-api-category";
+//	public final static String VODFILTER_H123 = "http://aps.lsott.com/app/";
 	public final static String VOD_DETAIL=BASE_URL+"/index.php?s=plus-api-json-vodids-";
-	
+	public final static String VOD_LIST=BASE_URL+"/index.php?s=plus-api-json-cid-";
+
+
 	//专题
 	public final static String TOPIC_URL = "http://www.smtvzm.com/index.php/tjinfo/getyszt.json";
 	public final static String TOPIC_HEAD_URL = "http://aps.lsott.com/app/app.php?nozzle=list&class=ablum&type=";

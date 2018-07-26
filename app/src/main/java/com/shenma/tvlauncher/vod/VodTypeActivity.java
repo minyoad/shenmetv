@@ -21,6 +21,7 @@ import com.shenma.tvlauncher.utils.Logger;
 import com.shenma.tvlauncher.utils.Utils;
 import com.shenma.tvlauncher.vod.adapter.TypeDetailsSubMenuAdapter;
 import com.shenma.tvlauncher.vod.adapter.VodtypeAdapter;
+import com.shenma.tvlauncher.vod.domain.Category;
 import com.shenma.tvlauncher.vod.domain.RequestVo;
 import com.shenma.tvlauncher.vod.domain.VodDataInfo;
 import com.shenma.tvlauncher.vod.domain.VodFilter;
@@ -49,6 +50,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+
 
 public class VodTypeActivity extends Activity implements OnItemClickListener {
 
@@ -83,25 +85,30 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
     private void initIntent() {
         Intent intent = getIntent();
         type = intent.getStringExtra("TYPE");
-        if (null != type && type.equals("TVPLAY")) {
-            // 连续剧
-            VOD_TYPE = Constant.TVPLAY;
-        } else if (null != type && type.equals("COMIC")) {
-            // 动漫
-            VOD_TYPE = Constant.COMIC;
-        } else if (null != type && type.equals("TVSHOW")) {
-            // 综艺
-            VOD_TYPE = Constant.TVSHOW;
-        } else if (null != type && type.equals("MOVIE")) {
-            // 电影
-            VOD_TYPE = Constant.MOVIE;
-        } else if (null != type && type.equals("TEACH")) {
-            // 教育
-            VOD_TYPE = Constant.TEACH;
-        } else if (null != type && type.equals("DOCUMENTARY")) {
-            // 记录
-            VOD_TYPE = Constant.DOCUMENTARY;
-        }
+
+        vod_type= Category.CategoryFromString(type);
+
+        VOD_TYPE=Constant.VOD_LIST+vod_type;
+
+//        if (null != type && type.equals("TVPLAY")) {
+//            // 连续剧
+//            VOD_TYPE = Constant.TVPLAY;
+//        } else if (null != type && type.equals("COMIC")) {
+//            // 动漫
+//            VOD_TYPE = Constant.COMIC;
+//        } else if (null != type && type.equals("TVSHOW")) {
+//            // 综艺
+//            VOD_TYPE = Constant.TVSHOW;
+//        } else if (null != type && type.equals("MOVIE")) {
+//            // 电影
+//            VOD_TYPE = Constant.MOVIE;
+//        } else if (null != type && type.equals("TEACH")) {
+//            // 教育
+//            VOD_TYPE = Constant.TEACH;
+//        } else if (null != type && type.equals("DOCUMENTARY")) {
+//            // 记录
+//            VOD_TYPE = Constant.DOCUMENTARY;
+//        }
 
     }
 
@@ -123,25 +130,41 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
      * 初始化数据
      */
     private void initData() {
-        if (VOD_TYPE.equals(Constant.TVPLAY)) {
-            // 连续剧
-            iv_type_details_type.setImageResource(R.drawable.vod_tvplay);
-        } else if (VOD_TYPE.equals(Constant.COMIC)) {
-            // 动漫
-            iv_type_details_type.setImageResource(R.drawable.vod_comic);
-        } else if (VOD_TYPE.equals(Constant.TVSHOW)) {
-            // 综艺
-            iv_type_details_type.setImageResource(R.drawable.vod_tvshow);
-        } else if (VOD_TYPE.equals(Constant.MOVIE)) {
-            // 电影
-            iv_type_details_type.setImageResource(R.drawable.vod_movie);
-        } else if (VOD_TYPE.equals(Constant.TEACH)) {
-            // 教育
-            iv_type_details_type.setImageResource(R.drawable.vod_teach);
-        } else if (VOD_TYPE.equals(Constant.DOCUMENTARY)) {
-            // 教育
-            iv_type_details_type.setImageResource(R.drawable.vod_documentary);
+
+        switch (vod_type){
+            case Category.MOVIE:
+                iv_type_details_type.setImageResource(R.drawable.vod_movie);
+            break;
+            case Category.TVPLAY:
+                iv_type_details_type.setImageResource(R.drawable.vod_tvplay);
+            break;
+            case Category.COMIC:
+                iv_type_details_type.setImageResource(R.drawable.vod_comic);
+            break;
+            case Category.TVSHOW:
+                iv_type_details_type.setImageResource(R.drawable.vod_tvshow);
+            break;
+
         }
+//        if (VOD_TYPE.equals(Constant.TVPLAY)) {
+//            // 连续剧
+//            iv_type_details_type.setImageResource(R.drawable.vod_tvplay);
+//        } else if (VOD_TYPE.equals(Constant.COMIC)) {
+//            // 动漫
+//            iv_type_details_type.setImageResource(R.drawable.vod_comic);
+//        } else if (VOD_TYPE.equals(Constant.TVSHOW)) {
+//            // 综艺
+//            iv_type_details_type.setImageResource(R.drawable.vod_tvshow);
+//        } else if (VOD_TYPE.equals(Constant.MOVIE)) {
+//            // 电影
+//            iv_type_details_type.setImageResource(R.drawable.vod_movie);
+//        } else if (VOD_TYPE.equals(Constant.TEACH)) {
+//            // 教育
+//            iv_type_details_type.setImageResource(R.drawable.vod_teach);
+//        } else if (VOD_TYPE.equals(Constant.DOCUMENTARY)) {
+//            // 教育
+//            iv_type_details_type.setImageResource(R.drawable.vod_documentary);
+//        }
         getFilterDataFromServer();
     }
 
@@ -234,11 +257,12 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
     protected void getFilterDataFromServer() {
         RequestVo vo = new RequestVo();
         vo.context = context;
-        if (type.equals("MOVIE") || type.equals("DOCUMENTARY") || type.equals("TEACH")) {
-            vo.requestUrl = Constant.VODFILTER;
-        } else {
-            vo.requestUrl = Constant.VODFILTER_H123;
-        }
+        vo.requestUrl = Constant.VODFILTER;
+//        if (type.equals("MOVIE") || type.equals("DOCUMENTARY") || type.equals("TEACH")) {
+//            vo.requestUrl = Constant.VODFILTER;
+//        } else {
+//            vo.requestUrl = Constant.VODFILTER_H123;
+//        }
         vo.type = VOD_FILTER;
         getDataFromServer(vo);
     }
@@ -252,28 +276,30 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
             //String area = areas.get(j);
             String area = (String) filter_list_area.getAdapter().getItem(j);
             area = Utils.getEcodString(area);
-            filterString = filterString + "&area=" + area;
+            filterString = filterString + "-area-" + area;
         }
         int k = filter_list_type.getCheckedItemPosition();
         if (k >= 0) {
             //String type = types.get(j);
             String type = (String) filter_list_type.getAdapter().getItem(k);
             type = Utils.getEcodString(type);
-            filterString = filterString + "&type=" + type;
+            filterString = filterString + "-type-" + type;
         }
         int m = filter_list_year.getCheckedItemPosition();
         if (m >= 0) {
             // areas.get(j);
             String year = (String) filter_list_year.getAdapter().getItem(m);
-            if (type.equals("TEACH")) {
-                filterString = filterString + "&language=" + year;
-            } else if (type.equals("COMIC")) {
-                filterString = filterString + "&prop=" + year;
-            } else if (type.equals("TVPLAY")) {
-                filterString = filterString + "&start=" + year;
-            } else {
-                filterString = filterString + "&year=" + year;
-            }
+            filterString = filterString + "-year-" + year;
+
+//            if (type.equals("TEACH")) {
+//                filterString = filterString + "&language=" + year;
+//            } else if (type.equals("COMIC")) {
+//                filterString = filterString + "&prop=" + year;
+//            } else if (type.equals("TVPLAY")) {
+//                filterString = filterString + "&start=" + year;
+//            } else {
+//                filterString = filterString + "-year-" + year;
+//            }
         }
 //		try {
 //			filterString = new String(filterString.getBytes(),"utf-8");
@@ -346,89 +372,98 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
             public void onResponse(VodFilter response) {
                 // TODO Auto-generated method stub
                 if (response != null) {
-                    if (VOD_TYPE.equals(Constant.TVPLAY)) {
-                        // 连续剧
-                        vodFilter = response.getTvplay();
-                    } else if (VOD_TYPE.equals(Constant.COMIC)) {
-                        // 动漫
-                        vodFilter = response.getComic();
-                    } else if (VOD_TYPE.equals(Constant.TVSHOW)) {
-                        // 综艺
-                        vodFilter = response.getTvshow();
-                    } else if (VOD_TYPE.equals(Constant.MOVIE)) {
-                        // 电影
-                        vodFilter = response.getMovie();
-                    } else if (VOD_TYPE.equals(Constant.TEACH)) {
-                        // 教育
-                        vodFilter = response.getTeach();
-                        tv_filter_year.setText("科目");
-                    } else if (VOD_TYPE.equals(Constant.DOCUMENTARY)) {
-                        // 记录
-                        vodFilter = response.getDocumentary();
-                    }
+
+                    Category category=response.getCategoryById(vod_type);
+
+//                    if (VOD_TYPE.equals(Constant.TVPLAY)) {
+//                        // 连续剧
+//                        vodFilter = response.getTvplay();
+//                    } else if (VOD_TYPE.equals(Constant.COMIC)) {
+//                        // 动漫
+//                        vodFilter = response.getComic();
+//                    } else if (VOD_TYPE.equals(Constant.TVSHOW)) {
+//                        // 综艺
+//                        vodFilter = response.getTvshow();
+//                    } else if (VOD_TYPE.equals(Constant.MOVIE)) {
+//                        // 电影
+//                        vodFilter = response.getMovie();
+//                    } else if (VOD_TYPE.equals(Constant.TEACH)) {
+//                        // 教育
+//                        vodFilter = response.getTeach();
+//                        tv_filter_year.setText("科目");
+//                    } else if (VOD_TYPE.equals(Constant.DOCUMENTARY)) {
+//                        // 记录
+//                        vodFilter = response.getDocumentary();
+//                    }
                     ArrayList<String> seachs = new ArrayList<String>();
                     seachs.add("搜索");
                     seachs.add("清空筛选");
-                    if (type.equals("MOVIE") || type.equals("DOCUMENTARY") || type.equals("TEACH")) {
-                        if (vodFilter.size() > 0) {
-                            types = Arrays.asList(vodFilter.get(0).getValues());
-                        }
-                        if (vodFilter.size() > 1) {
-                            years = Arrays.asList(vodFilter.get(1).getValues());
-                        }
-                        if (vodFilter.size() > 2) {
-                            areas = Arrays.asList(vodFilter.get(2).getValues());
-                        }
-                    } else {
-                        if (vodFilter.size() > 0) {
-                            String name = vodFilter.get(0).getField();
-                            if (name.equals("type")) {
-                                types = Arrays.asList(vodFilter.get(0).getValues());
-                            } else if (name.equals("year")) {
-                                years = Arrays.asList(vodFilter.get(0).getValues());
-                            } else if (name.equals("area")) {
-                                areas = Arrays.asList(vodFilter.get(0).getValues());
-                            } else if (name.equals("prop")) {
-                                years = Arrays.asList(vodFilter.get(0).getValues());
-                                tv_filter_year.setText("动漫版本");
-                            } else if (name.equals("start")) {
-                                years = Arrays.asList(vodFilter.get(0).getValues());
-                                tv_filter_year.setText("开播时间");
-                            }
-                        }
-                        if (vodFilter.size() > 1) {
-                            String name = vodFilter.get(1).getField();
-                            if (name.equals("type")) {
-                                types = Arrays.asList(vodFilter.get(1).getValues());
-                            } else if (name.equals("year")) {
-                                years = Arrays.asList(vodFilter.get(1).getValues());
-                            } else if (name.equals("area")) {
-                                areas = Arrays.asList(vodFilter.get(1).getValues());
-                            } else if (name.equals("prop")) {
-                                years = Arrays.asList(vodFilter.get(1).getValues());
-                                tv_filter_year.setText("动漫版本");
-                            } else if (name.equals("start")) {
-                                years = Arrays.asList(vodFilter.get(1).getValues());
-                                tv_filter_year.setText("开播时间");
-                            }
-                        }
-                        if (vodFilter.size() > 2) {
-                            String name = vodFilter.get(2).getField();
-                            if (name.equals("type")) {
-                                types = Arrays.asList(vodFilter.get(2).getValues());
-                            } else if (name.equals("year")) {
-                                years = Arrays.asList(vodFilter.get(2).getValues());
-                            } else if (name.equals("area")) {
-                                areas = Arrays.asList(vodFilter.get(2).getValues());
-                            } else if (name.equals("prop")) {
-                                years = Arrays.asList(vodFilter.get(2).getValues());
-                                tv_filter_year.setText("动漫版本");
-                            } else if (name.equals("start")) {
-                                years = Arrays.asList(vodFilter.get(2).getValues());
-                                tv_filter_year.setText("开播时间");
-                            }
-                        }
-                    }
+
+                    types=Arrays.asList(category.list_extend.type.split(","));
+                    years = Arrays.asList(category.list_extend.year.split(","));
+                    areas = Arrays.asList(category.list_extend.area.split(","));
+
+
+//                    if (type.equals("MOVIE") || type.equals("DOCUMENTARY") || type.equals("TEACH")) {
+//                        if (vodFilter.size() > 0) {
+//                            types = Arrays.asList(vodFilter.get(0).getValues());
+//                        }
+//                        if (vodFilter.size() > 1) {
+//                            years = Arrays.asList(vodFilter.get(1).getValues());
+//                        }
+//                        if (vodFilter.size() > 2) {
+//                            areas = Arrays.asList(vodFilter.get(2).getValues());
+//                        }
+//                    } else {
+//                        if (vodFilter.size() > 0) {
+//                            String name = vodFilter.get(0).getField();
+//                            if (name.equals("type")) {
+//                                types = Arrays.asList(vodFilter.get(0).getValues());
+//                            } else if (name.equals("year")) {
+//                                years = Arrays.asList(vodFilter.get(0).getValues());
+//                            } else if (name.equals("area")) {
+//                                areas = Arrays.asList(vodFilter.get(0).getValues());
+//                            } else if (name.equals("prop")) {
+//                                years = Arrays.asList(vodFilter.get(0).getValues());
+//                                tv_filter_year.setText("动漫版本");
+//                            } else if (name.equals("start")) {
+//                                years = Arrays.asList(vodFilter.get(0).getValues());
+//                                tv_filter_year.setText("开播时间");
+//                            }
+//                        }
+//                        if (vodFilter.size() > 1) {
+//                            String name = vodFilter.get(1).getField();
+//                            if (name.equals("type")) {
+//                                types = Arrays.asList(vodFilter.get(1).getValues());
+//                            } else if (name.equals("year")) {
+//                                years = Arrays.asList(vodFilter.get(1).getValues());
+//                            } else if (name.equals("area")) {
+//                                areas = Arrays.asList(vodFilter.get(1).getValues());
+//                            } else if (name.equals("prop")) {
+//                                years = Arrays.asList(vodFilter.get(1).getValues());
+//                                tv_filter_year.setText("动漫版本");
+//                            } else if (name.equals("start")) {
+//                                years = Arrays.asList(vodFilter.get(1).getValues());
+//                                tv_filter_year.setText("开播时间");
+//                            }
+//                        }
+//                        if (vodFilter.size() > 2) {
+//                            String name = vodFilter.get(2).getField();
+//                            if (name.equals("type")) {
+//                                types = Arrays.asList(vodFilter.get(2).getValues());
+//                            } else if (name.equals("year")) {
+//                                years = Arrays.asList(vodFilter.get(2).getValues());
+//                            } else if (name.equals("area")) {
+//                                areas = Arrays.asList(vodFilter.get(2).getValues());
+//                            } else if (name.equals("prop")) {
+//                                years = Arrays.asList(vodFilter.get(2).getValues());
+//                                tv_filter_year.setText("动漫版本");
+//                            } else if (name.equals("start")) {
+//                                years = Arrays.asList(vodFilter.get(2).getValues());
+//                                tv_filter_year.setText("开播时间");
+//                            }
+//                        }
+//                    }
 
                     if (null != types && types.size() > 0) {
                         TypeDetailsSubMenuAdapter typemenuAdapter1 = new TypeDetailsSubMenuAdapter(
@@ -753,6 +788,7 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
     private int vodpageindex;
     private int totalpage;
     private static String VOD_TYPE;
+    private int vod_type;
     private ArrayList<VodDataInfo> vodDatas;
     private VodTypeInfo vodtypeinfo;
     private VodtypeAdapter vodtypeAdapter;
