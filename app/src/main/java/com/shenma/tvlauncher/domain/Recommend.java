@@ -1,5 +1,7 @@
 package com.shenma.tvlauncher.domain;
 
+import com.shenma.tvlauncher.vod.domain.VodDataInfo;
+
 import java.io.Serializable;
 import java.util.List;
 /**
@@ -8,9 +10,10 @@ import java.util.List;
  *
  */
 public class Recommend implements Serializable  {
+	private String status;
 	private String code;
 	private String msg;
-	private List<RecommendInfo> data;
+	private List<VodDataInfo> data;
 	public String getCode() {
 		return code;
 	}
@@ -23,10 +26,10 @@ public class Recommend implements Serializable  {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
-	public List<RecommendInfo> getData() {
+	public List<VodDataInfo> getData() {
 		return data;
 	}
-	public void setData(List<RecommendInfo> data) {
+	public void setData(List<VodDataInfo> data) {
 		this.data = data;
 	}
 	@Override

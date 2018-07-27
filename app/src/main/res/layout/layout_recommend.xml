@@ -40,7 +40,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusUp="@id/rb_recommend"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/iv_search" />
         </FrameLayout>
 
@@ -66,7 +66,7 @@
                 android:layout_marginTop="@dimen/sm_38"
                 android:clickable="true"
                 android:focusable="true"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/iv_user" />
         </FrameLayout>
 
@@ -93,7 +93,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusDown="@id/rb_bm_tvplay"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/iv_store" />
         </FrameLayout>
 
@@ -119,7 +119,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusUp="@id/rb_recommend"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/fl_re_0" />
 
             <TextView
@@ -160,7 +160,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusDown="@id/rb_bm_tvplay"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/fl_re_1" />
             <TextView
                 android:id="@+id/tv_re_4"
@@ -200,7 +200,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusDown="@id/rb_bm_tvplay"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/fl_re_1" />
             <TextView
                 android:id="@+id/tv_re_5"
@@ -241,7 +241,7 @@
                 android:nextFocusDown="@id/rb_bm_tvplay"
                 android:nextFocusRight="@+id/iv_re_7"
                 android:nextFocusUp="@id/rb_recommend"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/fl_re_3" />
             <TextView
                 android:id="@+id/tv_re_6"
@@ -280,7 +280,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusUp="@id/rb_recommend"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/fl_re_4" />
             <TextView
                 android:id="@+id/tv_re_7"
@@ -320,7 +320,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusDown="@id/rb_bm_tvplay"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/fl_re_4" />
             <TextView
                 android:id="@+id/tv_re_8"

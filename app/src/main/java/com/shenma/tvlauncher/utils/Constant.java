@@ -16,8 +16,8 @@ public class Constant {
 	public static String VIP_PROXY_URL="https://beaacc.com/api.php?url=";
 	public static String UPDATE_URL = "http://www.smtvzm.com/index.php/version/chkupdate.json?";
 	public static String STARTINFO_URL = "http://www.smtvzm.com/index.php/user/addstartinfo.json?";
-	//public static String RECOMMEND_URL = "http://www.lepengbang.com/index.php/tjinfo/gettjinfo.json";
-	public static String RECOMMEND_URL = "http://www.smtvzm.com/index.php/tjinfo/gettjinfo.json?type=推荐";
+	public static String RECOMMEND_URL = BASE_URL+"/index.php?s=plus-api-json-tv-1-limit-6";
+//	public static String RECOMMEND_URL = "http://www.smtvzm.com/index.php/tjinfo/gettjinfo.json?type=推荐";
 	public static String HEARD_URL = "http://www.smtvzm.com/";
 	public static String RECAPPS = "http://www.smtvzm.com/index.php/tjinfo/gettjapp.json?";
 	public static String MOVIE_URL = "http://www.smtvzm.com/index.php/tjinfo/getclassify.json?";

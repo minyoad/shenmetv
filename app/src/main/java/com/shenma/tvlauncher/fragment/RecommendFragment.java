@@ -24,6 +24,8 @@ import com.shenma.tvlauncher.utils.ScaleAnimEffect;
 import com.shenma.tvlauncher.utils.Utils;
 import com.shenma.tvlauncher.vod.SearchActivity;
 import com.shenma.tvlauncher.vod.VodDetailsActivity;
+import com.shenma.tvlauncher.vod.domain.VodDataInfo;
+
 import android.content.Intent;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
@@ -146,26 +148,11 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
             	int paramInt = 0;
             	String paramUrl;
             	for(int i=0;i<data.size();i++){
-            		if(data.get(i).getTjwei().equals("1")){
-            			paramInt = 3;
-            			tvs[0].setText(data.get(i).getTjinfo());
-            		}else if(data.get(i).getTjwei().equals("2")){
-            			paramInt = 4;
-            			tvs[1].setText(data.get(i).getTjinfo());
-            		}else if(data.get(i).getTjwei().equals("3")){
-            			paramInt = 5;
-            			tvs[2].setText(data.get(i).getTjinfo());
-            		}else if(data.get(i).getTjwei().equals("4")){
-            			paramInt = 6;
-            			tvs[3].setText(data.get(i).getTjinfo());
-            		}else if(data.get(i).getTjwei().equals("5")){
-            			paramInt = 7;
-            			tvs[4].setText(data.get(i).getTjinfo());
-            		}else if(data.get(i).getTjwei().equals("6")){
-            			tvs[5].setText(data.get(i).getTjinfo());
-            			paramInt = 8;
-            		}
-            		paramUrl = Constant.HEARD_URL+data.get(i).getTjpicurl();
+            		paramInt=i+3;
+            		tvs[i].setText(data.get(i).getTitle());
+            		paramUrl=data.get(i).getPic();
+            		tvs[i].setVisibility(View.VISIBLE);
+
             		Logger.v("joychang", "paramUrl="+paramUrl);
             		//Logger.d(TAG, "getTjtype = "+data.get(i).getTjtype()+"...getTjid="+data.get(i).getTjid());
             		setTypeImage(paramInt,paramUrl);
@@ -701,7 +688,7 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 			startActivity(i);
 			break;
 		case R.id.iv_re_1:
-			//排行
+			//user
 			i = new Intent();
 			i.setClass(home, UserActivity.class);
 			startActivity(i);
@@ -723,9 +710,11 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 			if(null!=data){
 				i = new Intent();
 				i.setClass(home, VodDetailsActivity.class);
-				i.putExtra("nextlink", data.get(0).getTjurl());
+				i.putExtra("vodId", data.get(0).getId());
+
+				i.putExtra("nextlink", data.get(0).getNextlink());
 				i.putExtra("vodstate", data.get(0).getState());
-				i.putExtra("vodtype", data.get(0).getTjtype().toUpperCase());
+				i.putExtra("vodtype", data.get(0).getType().toUpperCase());
 				startActivity(i);
 			}
 			break;
@@ -733,9 +722,10 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 			if(null!=data){
 				i = new Intent();
 				i.setClass(home, VodDetailsActivity.class);
-				i.putExtra("nextlink", data.get(1).getTjurl());
+				i.putExtra("vodId", data.get(1).getId());
+				i.putExtra("nextlink", data.get(1).getNextlink());
 				i.putExtra("vodstate", data.get(1).getState());
-				i.putExtra("vodtype", data.get(1).getTjtype().toUpperCase());
+				i.putExtra("vodtype", data.get(1).getType().toUpperCase());
 				startActivity(i);
 			}
 			break;
@@ -743,9 +733,10 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 			if(null!=data){
 				i = new Intent();
 				i.setClass(home, VodDetailsActivity.class);
-				i.putExtra("nextlink", data.get(2).getTjurl());
+				i.putExtra("vodId", data.get(2).getId());
+				i.putExtra("nextlink", data.get(2).getNextlink());
 				i.putExtra("vodstate", data.get(2).getState());
-				i.putExtra("vodtype", data.get(2).getTjtype().toUpperCase());
+				i.putExtra("vodtype", data.get(2).getType().toUpperCase());
 				startActivity(i);
 			}
 			break;
@@ -753,10 +744,11 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 			if(null!=data){
 				i = new Intent();
 				i.setClass(home, VodDetailsActivity.class);
-				i.putExtra("nextlink", data.get(3).getTjurl());
+				i.putExtra("vodId", data.get(3).getId());
+				i.putExtra("nextlink", data.get(3).getNextlink());
 				i.putExtra("vodstate", data.get(3).getState());
-				i.putExtra("vodtype", data.get(3).getTjtype().toUpperCase());
-				Logger.d(TAG, "推荐位类型===="+data.get(3).getTjtype().toUpperCase());
+				i.putExtra("vodtype", data.get(3).getType().toUpperCase());
+				Logger.d(TAG, "推荐位类型===="+data.get(3).getType().toUpperCase());
 				startActivity(i);
 			}
 			break;
@@ -764,9 +756,10 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 			if(null!=data){
 				i = new Intent();
 				i.setClass(home, VodDetailsActivity.class);
-				i.putExtra("nextlink", data.get(4).getTjurl());
+				i.putExtra("vodId", data.get(4).getId());
+				i.putExtra("nextlink", data.get(4).getNextlink());
 				i.putExtra("vodstate", data.get(4).getState());
-				i.putExtra("vodtype", data.get(4).getTjtype().toUpperCase());
+				i.putExtra("vodtype", data.get(4).getType().toUpperCase());
 				startActivity(i);
 			}
 			break;
@@ -774,9 +767,10 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 			if(null!=data){
 				i = new Intent();
 				i.setClass(home, VodDetailsActivity.class);
-				i.putExtra("nextlink", data.get(5).getTjurl());
+				i.putExtra("vodId", data.get(5).getId());
+				i.putExtra("nextlink", data.get(5).getNextlink());
 				i.putExtra("vodstate", data.get(5).getState());
-				i.putExtra("vodtype", data.get(5).getTjtype().toUpperCase());
+				i.putExtra("vodtype", data.get(5).getType().toUpperCase());
 				Logger.d(TAG, "星星state="+data.get(5).getState());
 				startActivity(i);
 			}
@@ -797,7 +791,7 @@ public class RecommendFragment extends BaseFragment implements OnFocusChangeList
 	
 	public RequestQueue mQueue;
 	public ImageLoader imageLoader;
-	private List<RecommendInfo> data = null;
+	private List<VodDataInfo> data = null;
 	private TextView tv_intro = null;
 
 }
