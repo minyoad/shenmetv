@@ -10,8 +10,20 @@ import java.util.List;
  */
 public class Topic {
 
+	private String status;
+	public Page page;
+
+
 	private String code;
 	private String msg;
+
+	public static class Page{
+		public int pageindex;
+		public int pagecount;
+		public int pagesize;
+		public int recordcount;
+	}
+
 	private List<TopicInfo> data = new ArrayList<TopicInfo>();
 
 	public String getCode() {

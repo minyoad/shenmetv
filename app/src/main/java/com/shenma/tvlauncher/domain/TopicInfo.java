@@ -1,5 +1,8 @@
 package com.shenma.tvlauncher.domain;
 
+import com.google.gson.annotations.SerializedName;
+import com.shenma.tvlauncher.utils.Constant;
+
 /**
  * 专题详情
  * @author joychang
@@ -7,13 +10,24 @@ package com.shenma.tvlauncher.domain;
  */
 public class TopicInfo {
 
+	@SerializedName("special_id")
 	private String id;
+	@SerializedName("special_name")
+
 	private String ztname;
+	@SerializedName("special_logo")
+
 	private String bigpic;
+	@SerializedName("special_banner")
+
 	private String smallpic;
+	@SerializedName("special_content")
+
 	private String ztdescribe;
 	private String linkurl;
 	private String videotype;
+	@SerializedName("special_status")
+
 	private String status;
 	private String expiretime;
 	private String tjwei;
@@ -35,7 +49,10 @@ public class TopicInfo {
 	}
 
 	public String getBigpic() {
-		return bigpic;
+//		return bigpic;
+		if(bigpic!=null &&bigpic.startsWith("http"))
+			return bigpic;
+		else return Constant.BASE_URL+bigpic;
 	}
 
 	public void setBigpic(String bigpic) {
@@ -43,7 +60,9 @@ public class TopicInfo {
 	}
 
 	public String getSmallpic() {
+		if(smallpic!=null &&smallpic.startsWith("http"))
 		return smallpic;
+		else return Constant.BASE_URL+smallpic;
 	}
 
 	public void setSmallpic(String smallpic) {

@@ -110,26 +110,28 @@ public class TopicFragment extends BaseFragment implements
 				int paramInt = 0;
 				String paramUrl;
 				for (int i = 0; i < data.size(); i++) {
-					if (data.get(i).getTjwei().equals("1")) {
-						paramInt = 0;
-						qxk = i;
-					} else if (data.get(i).getTjwei().equals("2")) {
-						paramInt = 1;
-						tvb = i;
-					} else if (data.get(i).getTjwei().equals("3")) {
-						paramInt = 2;
-						etjy = i;
-					} else if (data.get(i).getTjwei().equals("4")) {
-						zrf = i;
-						paramInt = 3;
-					} else if (data.get(i).getTjwei().equals("5")) {
-						wpzy = i;
-						paramInt = 4;
-					} else if (data.get(i).getTjwei().equals("6")) {
-						gx = i;
-						paramInt = 5;
-					}
-					paramUrl = Constant.HEARD_URL + data.get(i).getSmallpic();
+					paramInt=i;
+
+//					if (data.get(i).getTjwei().equals("1")) {
+//						paramInt = 0;
+//						qxk = i;
+//					} else if (data.get(i).getTjwei().equals("2")) {
+//						paramInt = 1;
+//						tvb = i;
+//					} else if (data.get(i).getTjwei().equals("3")) {
+//						paramInt = 2;
+//						etjy = i;
+//					} else if (data.get(i).getTjwei().equals("4")) {
+//						zrf = i;
+//						paramInt = 3;
+//					} else if (data.get(i).getTjwei().equals("5")) {
+//						wpzy = i;
+//						paramInt = 4;
+//					} else if (data.get(i).getTjwei().equals("6")) {
+//						gx = i;
+//						paramInt = 5;
+//					}
+					paramUrl =  data.get(i).getSmallpic();
 					Logger.v("joychang", "paramUrl=" + paramUrl);
 					if (null != paramUrl && !paramUrl.contains("null")) {
 						setTypeImage(paramInt, paramUrl);
@@ -198,6 +200,7 @@ public class TopicFragment extends BaseFragment implements
 		mvbgs[3] = R.drawable.topic_iv_3;
 		mvbgs[4] = R.drawable.topic_iv_4;
 		mvbgs[5] = R.drawable.topic_iv_5;
+
 		for (int i = 0; i < mv_typeLogs.length; i++) {
 			mvLogs[i].setVisibility(View.GONE);
 			mv_typeLogs[i].setOnClickListener(this);
@@ -219,9 +222,10 @@ public class TopicFragment extends BaseFragment implements
 		case R.id.topic_iv_0:
 			//抢先看
 			if(null!=data && data.size()>0){
-				i.putExtra("describe", data.get(qxk).getZtdescribe());
-				i.putExtra("bigpic", data.get(qxk).getBigpic());
-				i.putExtra("linkurl", data.get(qxk).getLinkurl());
+				i.putExtra("id",data.get(0).getId());
+				i.putExtra("describe", data.get(0).getZtdescribe());
+				i.putExtra("bigpic", data.get(0).getBigpic());
+				i.putExtra("linkurl", data.get(0).getLinkurl());
 				i.putExtra("TYPE", "MOVIE");
 				startActivity(i);
 			}
@@ -229,9 +233,11 @@ public class TopicFragment extends BaseFragment implements
 		case R.id.topic_iv_1:
 			//热播电视剧
 			if(null!=data && data.size()>1){
-				i.putExtra("describe", data.get(tvb).getZtdescribe());
-				i.putExtra("bigpic", data.get(tvb).getBigpic());
-				i.putExtra("linkurl", data.get(tvb).getLinkurl());
+				i.putExtra("id",data.get(1).getId());
+
+				i.putExtra("describe", data.get(1).getZtdescribe());
+				i.putExtra("bigpic", data.get(1).getBigpic());
+				i.putExtra("linkurl", data.get(1).getLinkurl());
 				i.putExtra("TYPE", "MOVIE");
 				startActivity(i);
 			}
@@ -239,9 +245,11 @@ public class TopicFragment extends BaseFragment implements
 		case R.id.topic_iv_2:
 			//儿童教育
 			if(null!=data && data.size()>2){
-				i.putExtra("describe", data.get(etjy).getZtdescribe());
-				i.putExtra("bigpic", data.get(etjy).getBigpic());
-				i.putExtra("linkurl", data.get(etjy).getLinkurl());
+				i.putExtra("id",data.get(2).getId());
+
+				i.putExtra("describe", data.get(2).getZtdescribe());
+				i.putExtra("bigpic", data.get(2).getBigpic());
+				i.putExtra("linkurl", data.get(2).getLinkurl());
 				i.putExtra("TYPE", "MOVIE");
 				startActivity(i);
 			}
@@ -249,9 +257,11 @@ public class TopicFragment extends BaseFragment implements
 		case R.id.topic_iv_3:
 			//周润发专题
 			if(null!=data && data.size()>3){
-				i.putExtra("describe", data.get(zrf).getZtdescribe());
-				i.putExtra("bigpic", data.get(zrf).getBigpic());
-				i.putExtra("linkurl", data.get(zrf).getLinkurl());
+				i.putExtra("id",data.get(3).getId());
+
+				i.putExtra("describe", data.get(3).getZtdescribe());
+				i.putExtra("bigpic", data.get(3).getBigpic());
+				i.putExtra("linkurl", data.get(3).getLinkurl());
 				i.putExtra("TYPE", "MOVIE");
 				startActivity(i);
 			}
@@ -259,9 +269,11 @@ public class TopicFragment extends BaseFragment implements
 		case R.id.topic_iv_4:
 			//王牌综艺
 			if(null!=data && data.size()>4){
-				i.putExtra("describe", data.get(wpzy).getZtdescribe());
-				i.putExtra("bigpic", data.get(wpzy).getBigpic());
-				i.putExtra("linkurl", data.get(wpzy).getLinkurl());
+				i.putExtra("id",data.get(4).getId());
+
+				i.putExtra("describe", data.get(4).getZtdescribe());
+				i.putExtra("bigpic", data.get(4).getBigpic());
+				i.putExtra("linkurl", data.get(4).getLinkurl());
 				i.putExtra("TYPE", "MOVIE");
 				startActivity(i);
 			}
@@ -269,9 +281,9 @@ public class TopicFragment extends BaseFragment implements
 		case R.id.topic_iv_5:
 			//搞笑
 			if(null!=data && data.size()>5){
-				i.putExtra("describe", data.get(gx).getZtdescribe());
-				i.putExtra("bigpic", data.get(gx).getBigpic());
-				i.putExtra("linkurl", data.get(gx).getLinkurl());
+				i.putExtra("describe", data.get(5).getZtdescribe());
+				i.putExtra("bigpic", data.get(5).getBigpic());
+				i.putExtra("linkurl", data.get(5).getLinkurl());
 				i.putExtra("TYPE", "MOVIE");
 				startActivity(i);
 			}

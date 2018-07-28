@@ -46,6 +46,7 @@ public class TopicActivity extends BaseActivity {
 	private ImageView iv_topic_poster;
 	private DisplayImageOptions options;
 	protected ImageLoader imageLoader = ImageLoader.getInstance();
+	private int specialId;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,17 +73,18 @@ public class TopicActivity extends BaseActivity {
 	};
 	private void initIntent() {
 		Intent intent = getIntent();
+		specialId=intent.getIntExtra("id",0);
 		vodtype = intent.getStringExtra("TYPE");
 		describe = intent.getStringExtra("describe");
 		bigpic = intent.getStringExtra("bigpic");
 		linkurl = intent.getStringExtra("linkurl");
-		try {
-			linkurl = URLEncoder.encode(linkurl, "utf-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
+//		try {
+//			linkurl = URLEncoder.encode(linkurl, "utf-8");
+//		} catch (UnsupportedEncodingException e) {
+//			e.printStackTrace();
+//		}
 		mQueue = Volley.newRequestQueue(TopicActivity.this, new HurlStack());
-		GsonRequest<VodTypeInfo> mVodData = new GsonRequest<VodTypeInfo>(Method.GET, Constant.TOPIC_HEAD_URL+linkurl,
+		GsonRequest<VodTypeInfo> mVodData = new GsonRequest<VodTypeInfo>(Method.GET, Constant.TOPIC_HEAD_URL+specialId,
 				VodTypeInfo.class,createVodDataSuccessListener(),createVodDataErrorListener());
 		mQueue.add(mVodData); 
 	}
@@ -141,6 +143,7 @@ public class TopicActivity extends BaseActivity {
 					int position, long id) {
 				VodDataInfo vod = vodDatas.get(position);
 				Bundle pBundle = new Bundle();
+				pBundle.putLong("vodId",vod.getId());
 				pBundle.putString("vodtype",vodtype);
 				pBundle.putString("vodstate","专题");
 				pBundle.putString("nextlink",vod.getNextlink());
@@ -151,7 +154,7 @@ public class TopicActivity extends BaseActivity {
 	
 	private void initData() {
 		initIntent();
-		imageLoader.displayImage(Constant.HEARD_URL+bigpic, topic_bg);
+		imageLoader.displayImage(bigpic, topic_bg);
 		topic_detail_msg_tv.setText(describe);
 	}
 	

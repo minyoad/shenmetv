@@ -11,19 +11,19 @@ import android.os.Environment;
  */
 public class Constant {
 
-	public static String BASE_URL="http://ssvip.mybacc.com";
+	public static String BASE_URL="http://ssvip.mybacc.com/";
 
 	public static String VIP_PROXY_URL="https://beaacc.com/api.php?url=";
-	public static String UPDATE_URL = "http://www.smtvzm.com/index.php/version/chkupdate.json?";
-	public static String STARTINFO_URL = "http://www.smtvzm.com/index.php/user/addstartinfo.json?";
+	public static String UPDATE_URL = BASE_URL+"index.php/version/chkupdate.json?";
+	public static String STARTINFO_URL = BASE_URL+"index.php/user/addstartinfo.json?";
 	public static String RECOMMEND_URL = BASE_URL+"/index.php?s=plus-api-json-tv-1-limit-6";
-//	public static String RECOMMEND_URL = "http://www.smtvzm.com/index.php/tjinfo/gettjinfo.json?type=推荐";
-	public static String HEARD_URL = "http://www.smtvzm.com/";
-	public static String RECAPPS = "http://www.smtvzm.com/index.php/tjinfo/gettjapp.json?";
-	public static String MOVIE_URL = "http://www.smtvzm.com/index.php/tjinfo/getclassify.json?";
-	public static String UPLOAD_URL = "http://www.smtvzm.com/index.php/user/downinfo.json?";
-	public static String USERLOGIN = "http://www.smtvzm.com/index.php/user/login.json";
-	public static String USERREG = "http://www.smtvzm.com/index.php/user/reg.json";
+//	public static String RECOMMEND_URL = BASE_URL+"index.php/tjinfo/gettjinfo.json?type=推荐";
+	public static String HEARD_URL = BASE_URL;
+	public static String RECAPPS = BASE_URL+"index.php/tjinfo/gettjapp.json?";
+	public static String MOVIE_URL = BASE_URL+"index.php/tjinfo/getclassify.json?";
+	public static String UPLOAD_URL = BASE_URL+"index.php/user/downinfo.json?";
+	public static String USERLOGIN = BASE_URL+"index.php/user/login.json";
+	public static String USERREG = BASE_URL+"index.php/user/reg.json";
 	
 	//当前程序公用的文件路径
 	public static String PUBLIC_DIR = Environment.getExternalStorageDirectory().getAbsolutePath()+File.separator+"ShenMa"+File.separator;
@@ -42,12 +42,12 @@ public class Constant {
 	public static final String ENTER_URL_MAC = "http://wlhd.lsott.com/api/index.php?mac=555666";
 	
 	//影视
-	public final static String TVPLAY = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-2";
-	public final static String COMIC = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-3";
-	public final static String TVSHOW = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-4";
-	public final static String MOVIE = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-1";
-	public final static String TEACH = "http://aps.lsott.com/app/app.php?nozzle=list&class=teach";
-	public final static String DOCUMENTARY = "http://aps.lsott.com/app/app.php?nozzle=list&class=documentary";
+//	public final static String TVPLAY = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-2";
+//	public final static String COMIC = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-3";
+//	public final static String TVSHOW = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-4";
+//	public final static String MOVIE = "http://ssvip.mybacc.com/index.php?s=plus-api-json-cid-1";
+//	public final static String TEACH = "http://aps.lsott.com/app/app.php?nozzle=list&class=teach";
+//	public final static String DOCUMENTARY = "http://aps.lsott.com/app/app.php?nozzle=list&class=documentary";
 	public final static String VODFILTER = BASE_URL+"/index.php?s=plus-api-category";
 //	public final static String VODFILTER_H123 = "http://aps.lsott.com/app/";
 	public final static String VOD_DETAIL=BASE_URL+"/index.php?s=plus-api-json-vodids-";
@@ -55,10 +55,10 @@ public class Constant {
 
 
 	//专题
-	public final static String TOPIC_URL = "http://www.smtvzm.com/index.php/tjinfo/getyszt.json";
-	public final static String TOPIC_HEAD_URL = "http://aps.lsott.com/app/app.php?nozzle=list&class=ablum&type=";
+	public final static String TOPIC_URL = BASE_URL+"/index.php?s=plus-api-special-limit-6";
+	public final static String TOPIC_HEAD_URL = BASE_URL+"/index.php?s=plus-api-json-special-";
 	//搜索
-	public final static String VOD_TYPE_ALL = "http://www.smtvzm.com/index.php/seachinfo/seachsp.json?zm=";
+	public final static String VOD_TYPE_ALL = BASE_URL+"index.php/seachinfo/seachsp.json?zm=";
 	public final static String VOD_TYPE = "http://aps.lsott.com/app/app.php?nozzle=character&zm=";
 	public final static String VOD_TYPE_HAO123 = "http://aps.lsott.com/app/?nozzle=character&zm=";
 	
@@ -73,7 +73,7 @@ public class Constant {
 	
 	//电视频道
 	public final static String TVSTATIONS = "http://smtvzm.com/index.php/channel/getsyschannel.json";
-	public final static String WALLPAPER = "http://www.smtvzm.com/index.php/skin/getskininfo.json";
+	public final static String WALLPAPER = BASE_URL+"index.php/skin/getskininfo.json";
 	
 //	private final static String TVPALY = "http://api.lsott.com/app/?nozzle=list&class=tvplay";
 //	private final static String COMIC = "http://api.lsott.com/app/?nozzle=list&class=comic";
