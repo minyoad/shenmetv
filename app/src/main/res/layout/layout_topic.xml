@@ -50,7 +50,7 @@
                 android:focusable="true"
                 android:nextFocusDown="@id/rb_bm_tvplay"
                 android:nextFocusUp="@id/rb_video_type"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/topic_iv_0" />
         </FrameLayout>
 
@@ -85,7 +85,7 @@
                 android:focusable="true"
                 android:nextFocusDown="@+id/topic_iv_2"
                 android:nextFocusUp="@id/rb_video_type"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/topic_iv_1" />
         </FrameLayout>
 
@@ -120,7 +120,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusDown="@id/rb_bm_tvplay"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/topic_iv_2" />
         </FrameLayout>
 
@@ -155,7 +155,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusDown="@id/rb_bm_tvplay"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/topic_iv_3" />
         </FrameLayout>
 
@@ -191,7 +191,7 @@
                 android:nextFocusDown="@id/rb_bm_tvplay"
                 android:nextFocusRight="@+id/topic_iv_5"
                 android:nextFocusUp="@id/rb_video_type"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/topic_iv_4" />
         </FrameLayout>
 
@@ -225,7 +225,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:nextFocusUp="@id/rb_video_type"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
                 android:src="@drawable/topic_iv_5" />
         </FrameLayout>
     </RelativeLayout>

@@ -52,6 +52,8 @@ public class Constant {
 //	public final static String VODFILTER_H123 = "http://aps.lsott.com/app/";
 	public final static String VOD_DETAIL=BASE_URL+"/index.php?s=plus-api-json-vodids-";
 	public final static String VOD_LIST=BASE_URL+"/index.php?s=plus-api-json-cid-";
+	public final static String SEARCH_URL=BASE_URL+"/index.php?s=plus-api-json-wd-";
+
 
 
 	//专题
