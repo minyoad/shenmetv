@@ -3,6 +3,8 @@ package com.shenma.tvlauncher.vod.domain;
 import com.shenma.tvlauncher.utils.Constant;
 
 import java.io.Serializable;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -95,9 +97,17 @@ public class VideoList implements Serializable{
 	}
 
 	public static String getProxiedUrl(String vodUrl){
-		String vips[]={"qq","youku","mgtv","sohu","letv","pptv","iqiyi","wasu","baofeng","kankan"};
+		String urlHost="";
+		try {
+			URL url=new URL(vodUrl);
+			urlHost=url.getHost();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
+		String vips[]={"qq.com","youku.com","mgtv.com","sohu.com","letv.com","pptv.com","iqiyi.com","wasu.com","baofeng.com","kankan.com"};
 		for (String vip:vips){
-			if (vodUrl.contains(vip)){
+			if (urlHost.endsWith(vip)){
 				return Constant.VIP_PROXY_URL+vodUrl;
 			}
 		}
