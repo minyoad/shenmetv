@@ -24,7 +24,6 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
         initData();
 
         VideoInfo videoInfo=videoInfoList.get(playIndex);
