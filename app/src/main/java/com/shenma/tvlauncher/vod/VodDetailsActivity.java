@@ -475,137 +475,138 @@ public class VodDetailsActivity extends Activity {
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
 				// TODO Auto-generated method stub
-				//RadioButton rb = (RadioButton) findViewById(checkedId);
+				RadioButton rb = (RadioButton) findViewById(checkedId);
 				//Logger.v(TAG, "rg_video_details_resources数量="+rg_video_details_resources.getChildCount());
-				switch (checkedId) {
-				case R.string.vod_qq:
-					now_source = qqs;
-					domain = "qq";
-					break;
-				case R.string.vod_letv:
-					now_source = letvs;
-					domain = "letv";
-					break;
-				case R.string.vod_youku:
-					now_source = youkus;
-					domain = "youku";
-					break;
-				case R.string.vod_sohu:
-					now_source = sohus;
-					domain = "sohu";
-					break;
-				case R.string.vod_iqiyi:
-					now_source = iqiyis;
-					domain = "iqiyi";
-					break;
-				case R.string.vod_kankan:
-					now_source = kankans;
-					domain = "kankan";
-					break;
-				case R.string.vod_pptv:
-					now_source = pptvs;
-					domain = "pptv";
-					break;
-				case R.string.vod_pps_tv:
-					now_source = pps_tvs;
-					domain = "pps";
-					break;
-				case R.string.vod_funshion:
-					now_source = funshions;
-					domain = "funshion";
-					break;
-				case R.string.vod_hunan:
-					now_source = hunans;
-					domain = "hunantv";
-					break;
-				case R.string.vod_cntv:
-					now_source = cntvs;
-					domain = "cntv";
-					break;
-				case R.string.vod_tudou:
-					now_source = tudous;
-					domain = "tudou";
-					break;
-				case R.string.vod_baofeng:
-					now_source = baofengs;
-					domain = "baofeng";
-					break;
-				case R.string.vod_wasus:
-					now_source = wasus;
-					domain = "wasu";
-					break;
-					//电影端
-				case R.string.vod_m_pps:
-					now_source = mppss;
-					domain = "pps";
-					break;
-				case R.string.vod_m_youku:
-					now_source = myukus;
-					domain = "youku";
-					break;
-				case R.string.vod_m_fengxing:
-					now_source = mfengxings;
-					domain = "fengxing";
-					break;
-				case R.string.vod_m_qq:
-					now_source = mqqs;
-					domain = "qq";
-					break;
-				case R.string.vod_m_sohu:
-					now_source = msohus;
-					domain = "sohu";
-					break;
-				case R.string.vod_m_tv189:
-					now_source = mtv189s;
-					domain = "tv189";
-					break;
-				case R.string.vod_m_bdwp:
-					now_source = mbdwps;
-					domain = "bdwp";
-					break;
-				case R.string.vod_m_letv:
-					now_source = mletvs;
-					domain = "letv";
-					break;
-				case R.string.vod_m_pptv:
-					now_source = mpptvs;
-					domain = "pptv";
-					break;
-				case R.string.vod_m_cntv:
-					now_source = mcntvs;
-					domain = "cntv";
-					break;
-				case R.string.vod_m_m1905:
-					now_source = mm1905s;
-					domain = "m1905";
-					break;
-				case R.string.vod_m_wole:
-					now_source = mwoles;
-					domain = "wole";
-					break;
-				case R.string.vod_m_iqiyi:
-					now_source = mqiyis;
-					domain = "qiyi";
-					break;
-				case R.string.vod_m_tudou:
-					now_source = mtudous;
-					domain = "tudou";
-					break;
-				case R.string.vod_m_flv:
-					now_source = mflvs;
-					domain = "flv";
-					break;
-				case R.string.vod_m_xunlei:
-					now_source = mxunleis;
-					domain = "xunlei";
-					break;
+//				switch (checkedId) {
+//				case R.string.vod_qq:
+//					now_source = qqs;
+//					domain = "qq";
+//					break;
+//				case R.string.vod_letv:
+//					now_source = letvs;
+//					domain = "letv";
+//					break;
+//				case R.string.vod_youku:
+//					now_source = youkus;
+//					domain = "youku";
+//					break;
+//				case R.string.vod_sohu:
+//					now_source = sohus;
+//					domain = "sohu";
+//					break;
+//				case R.string.vod_iqiyi:
+//					now_source = iqiyis;
+//					domain = "iqiyi";
+//					break;
+//				case R.string.vod_kankan:
+//					now_source = kankans;
+//					domain = "kankan";
+//					break;
+//				case R.string.vod_pptv:
+//					now_source = pptvs;
+//					domain = "pptv";
+//					break;
+//				case R.string.vod_pps_tv:
+//					now_source = pps_tvs;
+//					domain = "pps";
+//					break;
+//				case R.string.vod_funshion:
+//					now_source = funshions;
+//					domain = "funshion";
+//					break;
+//				case R.string.vod_hunan:
+//					now_source = hunans;
+//					domain = "hunantv";
+//					break;
+//				case R.string.vod_cntv:
+//					now_source = cntvs;
+//					domain = "cntv";
+//					break;
+//				case R.string.vod_tudou:
+//					now_source = tudous;
+//					domain = "tudou";
+//					break;
+//				case R.string.vod_baofeng:
+//					now_source = baofengs;
+//					domain = "baofeng";
+//					break;
+//				case R.string.vod_wasus:
+//					now_source = wasus;
+//					domain = "wasu";
+//					break;
+//					//电影端
+//				case R.string.vod_m_pps:
+//					now_source = mppss;
+//					domain = "pps";
+//					break;
+//				case R.string.vod_m_youku:
+//					now_source = myukus;
+//					domain = "youku";
+//					break;
+//				case R.string.vod_m_fengxing:
+//					now_source = mfengxings;
+//					domain = "fengxing";
+//					break;
+//				case R.string.vod_m_qq:
+//					now_source = mqqs;
+//					domain = "qq";
+//					break;
+//				case R.string.vod_m_sohu:
+//					now_source = msohus;
+//					domain = "sohu";
+//					break;
+//				case R.string.vod_m_tv189:
+//					now_source = mtv189s;
+//					domain = "tv189";
+//					break;
+//				case R.string.vod_m_bdwp:
+//					now_source = mbdwps;
+//					domain = "bdwp";
+//					break;
+//				case R.string.vod_m_letv:
+//					now_source = mletvs;
+//					domain = "letv";
+//					break;
+//				case R.string.vod_m_pptv:
+//					now_source = mpptvs;
+//					domain = "pptv";
+//					break;
+//				case R.string.vod_m_cntv:
+//					now_source = mcntvs;
+//					domain = "cntv";
+//					break;
+//				case R.string.vod_m_m1905:
+//					now_source = mm1905s;
+//					domain = "m1905";
+//					break;
+//				case R.string.vod_m_wole:
+//					now_source = mwoles;
+//					domain = "wole";
+//					break;
+//				case R.string.vod_m_iqiyi:
+//					now_source = mqiyis;
+//					domain = "qiyi";
+//					break;
+//				case R.string.vod_m_tudou:
+//					now_source = mtudous;
+//					domain = "tudou";
+//					break;
+//				case R.string.vod_m_flv:
+//					now_source = mflvs;
+//					domain = "flv";
+//					break;
+//				case R.string.vod_m_xunlei:
+//					now_source = mxunleis;
+//					domain = "xunlei";
+//					break;
+//
+//					default:
+//						domain=videos.getPlaySrcList().get(0);
+////						now_source=videos.getPlayUrlList(domain);
+//
+//				}
 
-					default:
-						domain=videos.getPlaySrcList().get(0);
-//						now_source=videos.getPlayUrlList(domain);
-
-				}
-
+				domain=(String) rb.getTag();
 				now_source=videos.getPlayUrlList(domain);
 
 				//Logger.v(TAG, "rd=="+getString(checkedId)+"domain=="+domain);
@@ -646,38 +647,39 @@ public class VodDetailsActivity extends Activity {
 				RadioButton rb = new RadioButton(this);
 				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
 				rb.setPadding(0, 0, 0, 0);
+				rb.setTag(playSrc);
 				switch (playSrc.toLowerCase()){
 					case "letv":
 						rb.setBackgroundResource(R.drawable.source_letv_selector);
-						rb.setId(R.string.vod_m_letv);
+//						rb.setId(R.string.vod_m_letv);
 						break;
 					case "youku":
 						rb.setBackgroundResource(R.drawable.source_youku_selector);
-						rb.setId(R.string.vod_m_youku);
+//						rb.setId(R.string.vod_m_youku);
 						break;
 					case "qq":
 						rb.setBackgroundResource(R.drawable.source_qq_selector);
-						rb.setId(R.string.vod_m_qq);
+//						rb.setId(R.string.vod_m_qq);
 						break;
 					case "pptv":
 						rb.setBackgroundResource(R.drawable.source_pptv_selector);
-						rb.setId(R.string.vod_m_pptv);
+//						rb.setId(R.string.vod_m_pptv);
 						break;
 					case "iqiyi":
 						rb.setBackgroundResource(R.drawable.source_iqiyi_selector);
-						rb.setId(R.string.vod_m_iqiyi);
+//						rb.setId(R.string.vod_m_iqiyi);
 						break;
 					case "sohu":
 						rb.setBackgroundResource(R.drawable.source_sohu_selector);
-						rb.setId(R.string.vod_m_sohu);
+//						rb.setId(R.string.vod_m_sohu);
 						break;
 					case "cntv":
 						rb.setBackgroundResource(R.drawable.source_cntv_selector);
-						rb.setId(R.string.vod_m_cntv);
+//						rb.setId(R.string.vod_m_cntv);
 						break;
 					default:
 						rb.setBackgroundResource(R.drawable.source_other_selector);
-						rb.setId(R.string.vod_m_mgtv);
+//						rb.setId(R.string.vod_m_mgtv);
 						break;
 				}
 
