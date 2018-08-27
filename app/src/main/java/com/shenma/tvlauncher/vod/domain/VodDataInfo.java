@@ -41,7 +41,10 @@ public class VodDataInfo {
     }
 
     public String getPic() {
-        if (pic.startsWith("http")) {
+        if(pic.startsWith("http://img.maccms.com/pic.php")){
+            return pic.replace("http://img.maccms.com/pic.php",Constant.BASE_URL +"/pic.php");
+        }
+        else if (pic.startsWith("http")) {
             return pic;
         } else {
             return Constant.BASE_URL + pic;

@@ -208,6 +208,7 @@
     <string name="type_details_sum">共 部</string>
     <string name="prepare_search">输入片名拼音的首字母，如《太极》输入TJ</string>
     <string name="search_allline">搜 索</string>
+
     <string name="vod_kankan">迅雷</string>
     <string name="vod_pptv">pptv</string>
     <string name="vod_pps_tv">pps_tv</string>
