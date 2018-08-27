@@ -573,7 +573,7 @@ public class Utils{
     }
     /**
      * 根据label名字截取名字
-     * @param lable
+     * @param
      * @return
      */
     public static String getNameToLabel(String label){
@@ -663,8 +663,8 @@ public class Utils{
 	 * 获取底部的剧集数据
 	 * 
 	 * @param datas
-	 * @param isListData
-	 *            list或grid
+	 * @param
+	 *
 	 * @return
 	 */
 	public static List<String> getVideoBottomDatas(List<VodUrl> datas,
@@ -694,22 +694,39 @@ public class Utils{
 		return gv_list;
 	}
 
+	public static boolean isNumeric(String str) {
+		Pattern pattern = Pattern.compile("^[-\\+]?[\\d]*$");
+		return pattern.matcher(str).matches();
+	}
+
+	private static String getVodTitle(String title,int index){
+		String origTitle=title;
+		if(Utils.isNumeric(origTitle)){
+			origTitle="第" + origTitle + "集";
+		}
+
+		String newTitle=index + "-"+origTitle;
+		return newTitle;
+	}
+
 	public static List<VodUrl> getVideolvDatas(List<VodUrl> datas, int index) {
 		List<VodUrl> lv_list = new ArrayList<VodUrl>();
 		int j = index * 10;
 		if (null != datas && datas.size() - j >= 10) {
 			for (int i = 0; i < 10; i++) {
 				VodUrl vodurl = new VodUrl();
-				vodurl.setTitle("第" + (j + i + 1) + "集" + "-"
-						+ datas.get(j + i).getTitle());
+
+				String origTitle=datas.get(j + i).getTitle();
+				vodurl.setTitle(getVodTitle(origTitle,j+i+1));
 				vodurl.setUrl(datas.get(j + i).getUrl());
 				lv_list.add(vodurl);
 			}
 		} else {
 			for (int i = 0; i < datas.size() - j; i++) {
 				VodUrl vodurl = new VodUrl();
-				vodurl.setTitle("第" + (j + i + 1) + "集" + "-"
-						+ datas.get(j + i).getTitle());
+
+				String origTitle=datas.get(j + i).getTitle();
+				vodurl.setTitle(getVodTitle(origTitle,j+i+1));
 				vodurl.setUrl(datas.get(j + i).getUrl());
 				lv_list.add(vodurl);
 			}
