@@ -335,7 +335,7 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
         vo.context = context;
         vo.type = VOD_DATA;
         //vo.requestUrl = VOD_TYPE + "&page=" + pageindex + "&pagesize="+ PAGESIZE + filter;
-        vo.requestUrl = VOD_TYPE + "-p-" + pageindex + filter;
+        vo.requestUrl = VOD_TYPE + "-p-" + pageindex+"-limit-"+PAGESIZE + filter;
         Logger.d("joychang", "vo.requestUrl=" + vo.requestUrl);
         start = System.currentTimeMillis();
         getDataFromServer(vo);
@@ -783,7 +783,7 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
     private TextView tv_type_details_sum, tv_filter_year;
     private ImageView b_type_details_fliter;
     private GridView gv_type_details_grid;
-    private final static int PAGESIZE = 30;
+    private final static int PAGESIZE = 20;
     private int pageindex = 1;
     private int vodpageindex;
     private int totalpage;

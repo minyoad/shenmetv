@@ -6,16 +6,17 @@ import android.os.Parcelable;
 import net.tsz.afinal.annotation.sqlite.Id;
 import net.tsz.afinal.annotation.sqlite.Table;
 
+import java.io.Serializable;
+
 /**
  * @Descripton 用户记录数据库
  * @author joychang
  */
-/**
- * @author joychang
- *
- */
+
 @Table(name = "albums")
 public class Album implements Parcelable{
+
+	private static final long serialVersionUID = 3070028055291587236L;
 	@Id(column = "id")// 数据库主键
 	private int id;
 	private String albumId;// 影片ID
@@ -28,6 +29,10 @@ public class Album implements Parcelable{
 	private String albumState;// 影片更新
 	private String albumPic;// 影片图片路径
 	private String nextLink;// 影片路径
+
+	public static long getSerialVersionUID() {
+		return serialVersionUID;
+	}
 
 	public int getId() {
 		return id;

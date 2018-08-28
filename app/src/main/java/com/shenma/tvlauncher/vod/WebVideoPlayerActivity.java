@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import com.mybacc.xwalkvideoplayer.XwalkWebViewActivity;
+import com.shenma.tvlauncher.vod.dao.VodDao;
+import com.shenma.tvlauncher.vod.db.Album;
 import com.shenma.tvlauncher.vod.domain.VideoInfo;
 import com.shenma.tvlauncher.vod.domain.VideoList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class WebVideoPlayerActivity extends XwalkWebViewActivity {
 
@@ -20,9 +23,13 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
     private int playIndex;
     private int mLastPos;
 
+    private VodDao dao;
+    private Album album;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dao=new VodDao(this);
 
         initData();
 
@@ -35,6 +42,7 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
     }
 
     private void initData(){
+
         Intent intent = getIntent();
         videoInfoList = new ArrayList<VideoInfo>();
         videoInfoList = intent.getParcelableArrayListExtra("videoinfo");
@@ -48,6 +56,29 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
         sourceId = intent.getStringExtra("sourceId");
         playIndex = intent.getIntExtra("playIndex",0);
         mLastPos = intent.getIntExtra("collectionTime",0);
+
+        List<Album> albums=dao.queryAlbumById(videoId,2);
+        if (albums.size()>0){
+            album=albums.get(0);
+            mLastPos=album.getCollectionTime();
+        }
+        else {
+
+            album = new Album();
+            album.setAlbumId(videoId);
+            album.setAlbumSourceType(sourceId);
+//        album.setCollectionTime(pos);
+            album.setPlayIndex(playIndex);
+            album.setAlbumPic(albumPic);
+            album.setAlbumType(vodtype);
+            album.setAlbumTitle(vodname);
+            album.setAlbumState("");
+            album.setNextLink("");
+            album.setTypeId(2);//记录
+
+        }
+
+
     }
 
 
@@ -60,16 +91,42 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
 //            case "playing":
             case "loadeddata":{
                 //seek to lastplayed
-
+                if(mLastPos>0){
+                    seekTo(mLastPos);
+                }
 
             }
         }
 
     }
 
+
+    private void updateHistory(int pos){
+
+//        album = new Album();
+//        album.setAlbumId(videoId);
+//        album.setAlbumSourceType(sourceId);
+        album.setCollectionTime(pos);
+//        album.setPlayIndex(playIndex);
+//        album.setAlbumPic(albumPic);
+//        album.setAlbumType(vodtype);
+//        album.setAlbumTitle(vodname);
+//        album.setAlbumState("");
+//        album.setNextLink("");
+        album.setTypeId(2);//记录
+        dao.addAlbums(album);
+    }
+
+
     @Override
     public void onProgressUpdated(double position){
 
+        mLastPos=(int)position;
+        if (mLastPos % 5 ==0){
+
+            updateHistory(mLastPos);
+
+        }
 
     }
 
