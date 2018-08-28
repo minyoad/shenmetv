@@ -8,6 +8,7 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
 import com.shenma.tvlauncher.R;
+import com.shenma.tvlauncher.vod.domain.VideoDetailInfo;
 import com.shenma.tvlauncher.vod.domain.VodDataInfo;
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -25,14 +26,14 @@ import android.widget.TextView;
  * 
  */
 public class VodDetailsAdapter extends BaseAdapter {
-	private List<VodDataInfo> vodDatas;
+	private List<VideoDetailInfo> vodDatas;
 	private LayoutInflater mInflater;
 	private ImageLoader imageLoader;
 	private Context context;
 	private ViewHolder holder;
 	private DisplayImageOptions options;
 
-	public VodDetailsAdapter(Context context,ArrayList<VodDataInfo> datas,ImageLoader imageLoader) {
+	public VodDetailsAdapter(Context context,ArrayList<VideoDetailInfo> datas,ImageLoader imageLoader) {
 		this.context = context;
 		this.vodDatas = datas;
 		this.imageLoader = imageLoader;
@@ -63,8 +64,8 @@ public class VodDetailsAdapter extends BaseAdapter {
 		}else{
 			holder = (ViewHolder) convertView.getTag();
 		}
-		VodDataInfo vd = vodDatas.get(position);
-		imageLoader.displayImage(vd.getPic(), holder.iv_details_recommend_poster, options);
+		VideoDetailInfo vd = vodDatas.get(position);
+		imageLoader.displayImage(vd.getImg_url(), holder.iv_details_recommend_poster, options);
 		holder.tv_details_recommend_name.setText(vd.getTitle());
 		return convertView;
 	}

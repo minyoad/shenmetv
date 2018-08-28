@@ -60,6 +60,8 @@ import com.shenma.tvlauncher.vod.domain.VodDetailTypeInfo;
 import com.shenma.tvlauncher.vod.domain.VodUrl;
 public class VodDetailsActivity extends Activity {
 
+	private VideoDetailInfo videoDetailInfo;
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
@@ -474,137 +476,12 @@ public class VodDetailsActivity extends Activity {
 			
 			@Override
 			public void onCheckedChanged(RadioGroup group, int checkedId) {
-				// TODO Auto-generated method stub
+
 				RadioButton rb = (RadioButton) findViewById(checkedId);
-				//Logger.v(TAG, "rg_video_details_resources数量="+rg_video_details_resources.getChildCount());
-//				switch (checkedId) {
-//				case R.string.vod_qq:
-//					now_source = qqs;
-//					domain = "qq";
-//					break;
-//				case R.string.vod_letv:
-//					now_source = letvs;
-//					domain = "letv";
-//					break;
-//				case R.string.vod_youku:
-//					now_source = youkus;
-//					domain = "youku";
-//					break;
-//				case R.string.vod_sohu:
-//					now_source = sohus;
-//					domain = "sohu";
-//					break;
-//				case R.string.vod_iqiyi:
-//					now_source = iqiyis;
-//					domain = "iqiyi";
-//					break;
-//				case R.string.vod_kankan:
-//					now_source = kankans;
-//					domain = "kankan";
-//					break;
-//				case R.string.vod_pptv:
-//					now_source = pptvs;
-//					domain = "pptv";
-//					break;
-//				case R.string.vod_pps_tv:
-//					now_source = pps_tvs;
-//					domain = "pps";
-//					break;
-//				case R.string.vod_funshion:
-//					now_source = funshions;
-//					domain = "funshion";
-//					break;
-//				case R.string.vod_hunan:
-//					now_source = hunans;
-//					domain = "hunantv";
-//					break;
-//				case R.string.vod_cntv:
-//					now_source = cntvs;
-//					domain = "cntv";
-//					break;
-//				case R.string.vod_tudou:
-//					now_source = tudous;
-//					domain = "tudou";
-//					break;
-//				case R.string.vod_baofeng:
-//					now_source = baofengs;
-//					domain = "baofeng";
-//					break;
-//				case R.string.vod_wasus:
-//					now_source = wasus;
-//					domain = "wasu";
-//					break;
-//					//电影端
-//				case R.string.vod_m_pps:
-//					now_source = mppss;
-//					domain = "pps";
-//					break;
-//				case R.string.vod_m_youku:
-//					now_source = myukus;
-//					domain = "youku";
-//					break;
-//				case R.string.vod_m_fengxing:
-//					now_source = mfengxings;
-//					domain = "fengxing";
-//					break;
-//				case R.string.vod_m_qq:
-//					now_source = mqqs;
-//					domain = "qq";
-//					break;
-//				case R.string.vod_m_sohu:
-//					now_source = msohus;
-//					domain = "sohu";
-//					break;
-//				case R.string.vod_m_tv189:
-//					now_source = mtv189s;
-//					domain = "tv189";
-//					break;
-//				case R.string.vod_m_bdwp:
-//					now_source = mbdwps;
-//					domain = "bdwp";
-//					break;
-//				case R.string.vod_m_letv:
-//					now_source = mletvs;
-//					domain = "letv";
-//					break;
-//				case R.string.vod_m_pptv:
-//					now_source = mpptvs;
-//					domain = "pptv";
-//					break;
-//				case R.string.vod_m_cntv:
-//					now_source = mcntvs;
-//					domain = "cntv";
-//					break;
-//				case R.string.vod_m_m1905:
-//					now_source = mm1905s;
-//					domain = "m1905";
-//					break;
-//				case R.string.vod_m_wole:
-//					now_source = mwoles;
-//					domain = "wole";
-//					break;
-//				case R.string.vod_m_iqiyi:
-//					now_source = mqiyis;
-//					domain = "qiyi";
-//					break;
-//				case R.string.vod_m_tudou:
-//					now_source = mtudous;
-//					domain = "tudou";
-//					break;
-//				case R.string.vod_m_flv:
-//					now_source = mflvs;
-//					domain = "flv";
-//					break;
-//				case R.string.vod_m_xunlei:
-//					now_source = mxunleis;
-//					domain = "xunlei";
-//					break;
-//
-//					default:
-//						domain=videos.getPlaySrcList().get(0);
-////						now_source=videos.getPlayUrlList(domain);
-//
-//				}
+
+				if (rb==null){
+					return;
+				}
 
 				domain=(String) rb.getTag();
 				now_source=videos.getPlayUrlList(domain);
@@ -710,6 +587,64 @@ public class VodDetailsActivity extends Activity {
 		}
 	}
 
+	protected void processRelatedVods(){
+		RequestVo vo = new RequestVo();
+		vo.context = context;
+
+		if (videoDetailInfo==null){
+			return;
+		}
+
+		vo.requestUrl = Constant.SEARCH_URL+videoDetailInfo.getKeyword();
+
+		showProgressDialog();
+		mQueue = Volley.newRequestQueue(context, new HurlStack());
+		if(Utils.hasNetwork(context)){
+			GsonRequest<VodDetailTypeInfo> mVodData = new GsonRequest<VodDetailTypeInfo>(Method.GET, vo.requestUrl,
+					VodDetailTypeInfo.class,createVodDataSuccessListener2(),createVodDataErrorListener());
+			mQueue.add(mVodData);
+		}
+	}
+
+	private Response.Listener<VodDetailTypeInfo> createVodDataSuccessListener2() {
+		return new Response.Listener<VodDetailTypeInfo>() {
+			@Override
+			public void onResponse(VodDetailTypeInfo typeInfo) {
+				if (typeInfo!=null){
+
+					List<VideoDetailInfo> about=typeInfo.getData();
+
+					aboutlist=new ArrayList<>();
+					aboutlist.addAll(about);
+
+					if(about!=null && about.size()>0) {
+						vodDetailsAdapter = new VodDetailsAdapter(context, aboutlist, imageLoader);
+						gv_recommend_grid.setAdapter(vodDetailsAdapter); // 为界面填充数据
+						gv_recommend_grid.setOnItemClickListener(new OnItemClickListener() {
+
+							@Override
+							public void onItemClick(AdapterView<?> parent, View view,
+													int position, long id) {
+								if(null != aboutlist && aboutlist.size() > 0){
+									VideoDetailInfo info=aboutlist.get(position);
+									vodId=Integer.parseInt(info.getId());
+
+//									nextlink = info.getVideolist().getPlayUrlList();
+									album = null;
+									initView();
+									//processLogic();
+								}
+							}
+						});
+					}
+
+				}
+				closeProgressDialog();
+			}
+		};
+	}
+
+
 	/**
 	 * 组拼数据
 	 */
@@ -744,14 +679,14 @@ public class VodDetailsActivity extends Activity {
         return new Response.Listener<VodDetailTypeInfo>() {
             @Override
             public void onResponse(VodDetailTypeInfo typeInfo) {
-            	VideoDetailInfo paramObject=null;
+				videoDetailInfo = null;
             	if (typeInfo!=null){
-            		paramObject=typeInfo.getData().get(0);
+            		videoDetailInfo =typeInfo.getData().get(0);
 				}
 
-    			if (null != paramObject) {
-    				vodname = paramObject.getTitle();
-    				videoId = paramObject.getId();
+    			if (null != videoDetailInfo) {
+    				vodname = videoDetailInfo.getTitle();
+    				videoId = videoDetailInfo.getId();
     				Logger.v(TAG, "服务器获取的videoId="+videoId);
     				albums = dao.queryAlbumById(videoId,2);
     				if(null!=albums && albums.size()>0){
@@ -767,17 +702,17 @@ public class VodDetailsActivity extends Activity {
     					b_details_play.requestFocus();
     				}
     				tv_details_name.setText(vodname);
-    				tv_details_director.setText(Arrays.toString(paramObject.getDirector()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
-    				tv_details_type.setText(Arrays.toString(paramObject.getType()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
-    				tv_details_actors.setText(Arrays.toString(paramObject.getActor()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
-    				tv_details_area.setText(Arrays.toString(paramObject.getArea()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
-    				if(null!=paramObject.getIntro()&&!"".equals(paramObject.getIntro())){
+    				tv_details_director.setText(Arrays.toString(videoDetailInfo.getDirector()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
+    				tv_details_type.setText(Arrays.toString(videoDetailInfo.getType()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
+    				tv_details_actors.setText(Arrays.toString(videoDetailInfo.getActor()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
+    				tv_details_area.setText(Arrays.toString(videoDetailInfo.getArea()).replace("[", "").replace("]", "").replace(",", " / ").replace("null", "暂无"));
+    				if(null!= videoDetailInfo.getIntro()&&!"".equals(videoDetailInfo.getIntro())){
     					//详情
-    					tv_details_video_introduce.setText("简介："+paramObject.getIntro().replace("null", "暂无"));
+    					tv_details_video_introduce.setText("简介："+ videoDetailInfo.getIntro().replace("null", "暂无"));
     				}else{
     					tv_details_video_introduce.setText("简介：暂无");
     				}
-    				albumPic = paramObject.getImg_url();
+    				albumPic = videoDetailInfo.getImg_url();
     				//imageLoader.displayImage(paramObject.getImg_url(),iv_details_poster, options);
     				imageLoader.displayImage(albumPic,iv_details_poster, options, new ImageLoadingListener() {
 						
@@ -813,7 +748,7 @@ public class VodDetailsActivity extends Activity {
 		    				iv_details_poster.setImageBitmap(bit);
 						}
 					});
-    				videos = paramObject.getVideolist();
+    				videos = videoDetailInfo.getVideolist();
     				if (vodtype.equals("MOVIE")) {
     					//是否收藏
     					b_details_favicon.setBackgroundResource(dao.queryZJById(videoId, 1)?R.drawable.video_details_yifavicon_selector:R.drawable.video_details_favicon_selector);
@@ -824,10 +759,10 @@ public class VodDetailsActivity extends Activity {
     					Logger.d(TAG,"是否追剧==="+dao.queryZJById(videoId, 0));
     					b_details_colection.setBackgroundResource(dao.queryZJById(videoId, 0)?R.drawable.video_details_yizhuiju_selector:R.drawable.video_details_zhuiju_selector);
     					//电视剧、动漫、综艺
-    					tv_details_year.setText(paramObject.getPubtime());
-    					tv_details_playTimes.setText(paramObject.getPubtime());
-    					if(null!=paramObject.getCur_episode()){
-    						String state = "更新至"+ paramObject.getCur_episode().replace("null", "0") + "集";
+    					tv_details_year.setText(videoDetailInfo.getPubtime());
+    					tv_details_playTimes.setText(videoDetailInfo.getPubtime());
+    					if(null!= videoDetailInfo.getCur_episode()){
+    						String state = "更新至"+ videoDetailInfo.getCur_episode().replace("null", "0") + "集";
     						if(null==vodstate || "".equals(vodstate)){
     							vodstate = state;
     						}
@@ -836,40 +771,44 @@ public class VodDetailsActivity extends Activity {
     						tv_details_rate.setText("");
     					}
     				}
-    				AboutInfo about = paramObject.getAbout();
-    				if(null!=about){
-    					ArrayList<VodDataInfo> similary = (ArrayList<VodDataInfo>) about.getSimilary();
-    					ArrayList<VodDataInfo> actor = (ArrayList<VodDataInfo>)about.getActor();
-    					if (null != similary && similary.size() > 0) {
-    						aboutlist  = similary;
-    						vodDetailsAdapter = new VodDetailsAdapter(context,
-    								aboutlist, imageLoader);
-    						Logger.v(TAG, "similary==" + similary.size());
 
-    					} else if (null != actor && actor.size() > 0) {
-    						aboutlist = actor;
-    						vodDetailsAdapter = new VodDetailsAdapter(context,
-    								aboutlist, imageLoader);
-    					}
 
-    				}
+//    				AboutInfo about = paramObject.getAbout();
+//    				if(null!=about){
+//    					ArrayList<VodDataInfo> similary = (ArrayList<VodDataInfo>) about.getSimilary();
+//    					ArrayList<VodDataInfo> actor = (ArrayList<VodDataInfo>)about.getActor();
+//    					if (null != similary && similary.size() > 0) {
+//    						aboutlist  = similary;
+//    						vodDetailsAdapter = new VodDetailsAdapter(context,
+//    								aboutlist, imageLoader);
+//    						Logger.v(TAG, "similary==" + similary.size());
+//
+//    					} else if (null != actor && actor.size() > 0) {
+//    						aboutlist = actor;
+//    						vodDetailsAdapter = new VodDetailsAdapter(context,
+//    								aboutlist, imageLoader);
+//    					}
+//
+//    				}
     				fillRadioGroup();
-    				gv_recommend_grid.setAdapter(vodDetailsAdapter); // 为界面填充数据
-    				gv_recommend_grid.setOnItemClickListener(new OnItemClickListener() {
-
-    					@Override
-    					public void onItemClick(AdapterView<?> parent, View view,
-    							int position, long id) {
-    						if(null != aboutlist && aboutlist.size() > 0){
-    							nextlink = aboutlist.get(position).getNextlink();
-    							album = null;
-    							initView();
-    							//processLogic();
-    						}
-    					}
-    				});
+//    				gv_recommend_grid.setAdapter(vodDetailsAdapter); // 为界面填充数据
+//    				gv_recommend_grid.setOnItemClickListener(new OnItemClickListener() {
+//
+//    					@Override
+//    					public void onItemClick(AdapterView<?> parent, View view,
+//    							int position, long id) {
+//    						if(null != aboutlist && aboutlist.size() > 0){
+//    							nextlink = aboutlist.get(position).getNextlink();
+//    							album = null;
+//    							initView();
+//    							//processLogic();
+//    						}
+//    					}
+//    				});
     			}
     			closeProgressDialog();
+
+				processRelatedVods();
             }
         };
      }
@@ -969,7 +908,7 @@ public class VodDetailsActivity extends Activity {
 	private Album album = null;
 	private String sourceId = null;
 	private int gv_postion = 0;
-	private ArrayList<VodDataInfo> aboutlist = null;
+	private ArrayList<VideoDetailInfo> aboutlist = null;
 	private RequestQueue mQueue;
 	private VodDao dao;
 	private String albumPic;//影片图片路径

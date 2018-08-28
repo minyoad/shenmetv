@@ -226,6 +226,22 @@ public class VideoDetailInfo {
 				+ ", about=" + about + ", videolist=" + videolist + "]";
 	}
 
+	public String getKeyword(){
+		if(vod_keywords!=null){
+			String[] keywords=vod_keywords.split(",");
+			if(keywords.length>0){
+				return keywords[0];
+			}
+		}
+
+		String[] actors=getActor();
+		if (actors!=null && actors.length>0){
+			return actors[0];
+		}
+
+		return getTitle();
+
+	}
 	/*
 	 * "id": "1090", "title": "Another日语", "trunk": "Another", "img_url":
 	 * "http://t2.baidu.com/it/u=3336384440,3102309761&fm=20", "intro":
