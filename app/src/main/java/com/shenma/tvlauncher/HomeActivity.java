@@ -173,7 +173,8 @@ public class HomeActivity extends BaseActivity {
 			//flyWhiteBorder(wWidth, wHeight, wX, wY);
 			//whiteBorder.setVisibility(View.VISIBLE);
 		//}
-	}	@Override
+	}
+	@Override
 	protected void onStart() {
 		super.onStart();
 		//initTitle(titile_position);
@@ -326,6 +327,13 @@ public class HomeActivity extends BaseActivity {
             public void onResponse(Update response) {
             	if(null!=response && "200".equals(response.getCode())){
               		Logger.d(TAG, "版本更新");
+
+              		//update proxy url if needed
+					String url=response.getData().getProxyurl();
+              		if(url!=null && !url.isEmpty()&& !url.equalsIgnoreCase(Constant.VIP_PROXY_URL)){
+						Constant.VIP_PROXY_URL=response.getData().getProxyurl();
+					}
+
             		if(null!=response.getData()){
             			String type = response.getData().getType();
         				// 是否提示更新版本
@@ -351,6 +359,7 @@ public class HomeActivity extends BaseActivity {
             }
         };
     }
+
 	@Override
 	protected void loadViewLayout() {
 		

@@ -21,6 +21,17 @@ public class UpdateInfo implements Serializable {
 	private String type;// 升级选项。1---可选择更新。2---强制更新
 	private String fromplat;//渠道名称
 	private String devicetype;//设备类型
+	private String proxyurl;//vip解析url更新
+
+	public String getProxyurl() {
+		return proxyurl;
+	}
+
+	public void setProxyurl(String proxyurl) {
+		this.proxyurl = proxyurl;
+	}
+
+
 	public String getId() {
 		return id;
 	}

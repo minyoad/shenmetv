@@ -13,8 +13,8 @@ public class Constant {
 
 	public static String BASE_URL="http://ssvip.mybacc.com/";
 
-	public static String VIP_PROXY_URL="https://beaacc.com/api.php?url=";
-	public static String UPDATE_URL = BASE_URL+"index.php/version/chkupdate.json?";
+	public static String VIP_PROXY_URL="http://jx.yes58587.xyz/av/?url=";
+	public static String UPDATE_URL = BASE_URL+"/update/updateinfo.json?";
 	public static String STARTINFO_URL = BASE_URL+"index.php/user/addstartinfo.json?";
 	public static String RECOMMEND_URL = BASE_URL+"/index.php?s=plus-api-json-tv-1-limit-6";
 //	public static String RECOMMEND_URL = BASE_URL+"index.php/tjinfo/gettjinfo.json?type=推荐";
