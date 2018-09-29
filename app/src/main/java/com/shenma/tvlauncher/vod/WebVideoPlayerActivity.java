@@ -2,6 +2,7 @@ package com.shenma.tvlauncher.vod;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.mybacc.xwalkvideoplayer.XwalkWebViewActivity;
 import com.shenma.tvlauncher.vod.dao.VodDao;
@@ -9,11 +10,16 @@ import com.shenma.tvlauncher.vod.db.Album;
 import com.shenma.tvlauncher.vod.domain.VideoInfo;
 import com.shenma.tvlauncher.vod.domain.VideoList;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class WebVideoPlayerActivity extends XwalkWebViewActivity {
+    private static final String TAG = "WebVideoPlayerActivity";
 
+    private static final int ENDING_LENGTH = 120; //120 seconds default
     private ArrayList<VideoInfo> videoInfoList;
     private String vodname;
     private String albumPic;
@@ -26,6 +32,10 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
     private VodDao dao;
     private Album album;
 
+    private int videoLength;
+
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,8 +43,40 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
 
         initData();
 
-        VideoInfo videoInfo=videoInfoList.get(playIndex);
+        playByIndex(playIndex);
 
+    }
+
+    private void playByIndex(int index){
+        if (index>=videoInfoList.size()){
+            Log.e(TAG, "playByIndex: index out of size");
+            return;
+        }
+
+        VideoInfo videoInfo=videoInfoList.get(index);
+//        vodname=videoInfo.title;
+
+        videoLength=0;
+
+        List<Album> albums=dao.queryAlbumById(videoId,2);
+        if (albums.size()>0){
+            album=albums.get(0);
+            mLastPos=album.getCollectionTime();
+        }
+        else {
+
+            album = new Album();
+            album.setAlbumId(videoId);
+            album.setAlbumSourceType(sourceId);
+//        album.setCollectionTime(pos);
+            album.setPlayIndex(playIndex);
+            album.setAlbumPic(albumPic);
+            album.setAlbumType(vodtype);
+            album.setAlbumTitle(vodname);
+            album.setAlbumState("");
+            album.setNextLink("");
+            album.setTypeId(2);//记录
+        }
 
         String url= VideoList.getProxiedUrl(videoInfo.url);
         play(url,vodname, videoInfo.title);
@@ -56,27 +98,6 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
         sourceId = intent.getStringExtra("sourceId");
         playIndex = intent.getIntExtra("playIndex",0);
         mLastPos = intent.getIntExtra("collectionTime",0);
-
-        List<Album> albums=dao.queryAlbumById(videoId,2);
-        if (albums.size()>0){
-            album=albums.get(0);
-            mLastPos=album.getCollectionTime();
-        }
-        else {
-
-            album = new Album();
-            album.setAlbumId(videoId);
-            album.setAlbumSourceType(sourceId);
-//        album.setCollectionTime(pos);
-            album.setPlayIndex(playIndex);
-            album.setAlbumPic(albumPic);
-            album.setAlbumType(vodtype);
-            album.setAlbumTitle(vodname);
-            album.setAlbumState("");
-            album.setNextLink("");
-            album.setTypeId(2);//记录
-
-        }
 
 
     }
@@ -128,10 +149,31 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
 
         }
 
+        if(videoLength>0 && videoLength-mLastPos<=ENDING_LENGTH){
+            playNext();
+        }
+
+    }
+
+    private void playNext() {
+        playByIndex(playIndex++);
     }
 
     @Override
     public void onPlayingProperties(String propertiesJson){
+
+        if(videoLength<=0) {
+            try {
+                JSONObject videoProps = new JSONObject(propertiesJson);
+
+               videoLength=videoProps.getInt("duration");
+                Log.d(TAG, "onPlayingProperties: videoLength="+videoLength);
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+
 
     }
 

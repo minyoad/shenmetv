@@ -50,7 +50,7 @@ public class AboutActivity extends BaseActivity {
     				}
         		}
         	}else if (null!=response && "10001".equals(response.getCode())) {
-				Utils.showToast(context, "赞哦，当前是最新版本哦", R.drawable.toast_smile);
+				Utils.showToast(context, "当前是最新版本", R.drawable.toast_smile);
         		Logger.d("zhouchuan", response.getMsg());
 			}
 		}

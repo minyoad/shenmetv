@@ -250,12 +250,12 @@ public abstract class XwalkWebViewActivity extends Activity implements VideoPlay
         mXwalkView.setResourceClient(new MyResourceClient(mXwalkView));
         mXwalkView.setUIClient(new MyUIClient(mXwalkView));
 
-        mImageView=findViewById(R.id.main_image);
+        mImageView=(ImageView) findViewById(R.id.main_image);
         mOverlayView=findViewById(R.id.view_overlay);
-        mLinearLayout=findViewById(R.id.loadingLayout);
-        mProgressCard=findViewById(R.id.progress_card);
-        mMovieName=findViewById(R.id.movieName);
-        mEpisodeName=findViewById(R.id.episodeName);
+        mLinearLayout=(LinearLayout) findViewById(R.id.loadingLayout);
+        mProgressCard=(ProgressBar)findViewById(R.id.progress_card);
+        mMovieName=(TextView) findViewById(R.id.movieName);
+        mEpisodeName=(TextView) findViewById(R.id.episodeName);
 
         mEpisodeListView=findViewById(R.id.episode_list_containter);
         mEpisodeSourceView=findViewById(R.id.episode_source_containter);
@@ -273,11 +273,18 @@ public abstract class XwalkWebViewActivity extends Activity implements VideoPlay
 
     }
 
-    public void play(String url,String title,String subtitle){
-        mXwalkView.loadUrl(url);
-        setTitle(title);
-        setSubtitle(subtitle);
-        showLoadingView();
+    public void play(final String url,final String title,final String subtitle){
+        runOnUiThread(new Runnable() {
+
+            @Override
+            public void run() {
+                mXwalkView.loadUrl(url);
+                setTitle(title);
+                setSubtitle(subtitle);
+                showLoadingView();
+            }
+        });
+
 
     }
 

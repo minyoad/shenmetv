@@ -30,9 +30,9 @@ public class Album implements Parcelable{
 	private String albumPic;// 影片图片路径
 	private String nextLink;// 影片路径
 
-	public static long getSerialVersionUID() {
-		return serialVersionUID;
-	}
+//	public static long getSerialVersionUID() {
+//		return serialVersionUID;
+//	}
 
 	public int getId() {
 		return id;

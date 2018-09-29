@@ -17,7 +17,7 @@ public class VodDao {
 	
 	/**
 	 * 添加一个影片记录
-	 * @param Album
+	 * @param album
 	 */
 	public void addAlbums(Album album){
 		String where ="albumType='"+album.getAlbumType()+
@@ -92,8 +92,7 @@ public class VodDao {
 	
 	
 	/**
-	 * 删除指定条件的app  条件为空则全部删除
-	 * @param where
+	 * 删除指定条件的app  条件为空则全部删除	 *
 	 */
 	public void deleteByWhere(String albumId, String albumType, int typeId){
 		String where = "albumId='"+albumId+
@@ -103,7 +102,7 @@ public class VodDao {
 	}
 	
 	/**
-	 * 删除指定条件的app  条件为空则全部删除
+	 * 删除指定条件的记录 条件为空则全部删除
 	 * @param where
 	 */
 	public void deleteAllByWhere(int typeId){

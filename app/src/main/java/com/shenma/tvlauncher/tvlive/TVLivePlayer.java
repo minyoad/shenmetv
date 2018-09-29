@@ -200,7 +200,8 @@ public class TVLivePlayer extends BaseActivity implements OnItemClickListener,
 	
 	private void initData(){
 		String ckinfo = "231231";
-		StringRequest sr = new StringRequest("http://www.smtvzm.com/index.php/user/getmychannel.xml?"+"loginname="+uName+"&ckinfo="+ckinfo, createMyReqSuccessListener(), createMyReqErrorListener()){
+		StringRequest sr = new StringRequest("http://www.smtvzm.com/index.php/user/getmychannel.xml?"+"loginname="+uName+"&ckinfo="+ckinfo,
+				createMyReqSuccessListener(), createMyReqErrorListener()){
 			@Override
 	        public Map<String, String> getHeaders() throws AuthFailureError {
 				HashMap<String, String> headers = new HashMap<String, String>();
