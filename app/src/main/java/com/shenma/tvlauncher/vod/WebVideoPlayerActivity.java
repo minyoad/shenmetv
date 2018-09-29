@@ -33,6 +33,7 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
     private Album album;
 
     private int videoLength;
+    private boolean isStopping;
 
 
 
@@ -80,6 +81,7 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
 
         String url= VideoList.getProxiedUrl(videoInfo.url);
         play(url,vodname, videoInfo.title);
+        isStopping=false;
 
     }
 
@@ -150,6 +152,7 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
         }
 
         if(videoLength>0 && videoLength-mLastPos<=ENDING_LENGTH){
+            isStopping=true;
             playNext();
         }
 
@@ -162,7 +165,7 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
     @Override
     public void onPlayingProperties(String propertiesJson){
 
-        if(videoLength<=0) {
+        if(videoLength<=0 &&!isStopping) {
             try {
                 JSONObject videoProps = new JSONObject(propertiesJson);
 

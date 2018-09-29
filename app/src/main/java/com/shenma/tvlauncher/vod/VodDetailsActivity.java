@@ -570,7 +570,7 @@ public class VodDetailsActivity extends Activity {
 				for(int i = 0;i<rg_video_details_resources.getChildCount();i++){
 					if(rg_video_details_resources.getChildAt(i).getId()==Integer.parseInt(sourceId)){
 						rg_video_details_resources.check(Integer.parseInt(sourceId));
-						Logger.v(TAG, "sourceId="+getString(Integer.parseInt(sourceId)));
+//						Logger.v(TAG, "sourceId="+getString(Integer.parseInt(sourceId)));
 					}
 				}
 			}else{
