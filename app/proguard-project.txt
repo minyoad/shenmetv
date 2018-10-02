@@ -5,17 +5,17 @@
 -verbose
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 
--libraryjars libs/android-support-v4.jar
--libraryjars libs/afinal-0.3.32-bin.jar
--libraryjars libs/cyberplayer-sdk.jar
--libraryjars libs/gson-2.2.4.jar
--libraryjars libs/universal-image-loader-1.8.6.jar
-#-libraryjars libs/volley.jar
--libraryjars libs/AndroidHttpServer-1.0.3.jar
--libraryjars ext-libs/android-hisi3716Mv300.jar
--libraryjars libs/umeng-sdk.jar
--libraryjars libs/shenma.jar
--libraryjars libs/lisenencoder.jar
+#-libraryjars libs/android-support-v4.jar
+#-libraryjars libs/afinal-0.3.32-bin.jar
+#-libraryjars libs/cyberplayer-sdk.jar
+#-libraryjars libs/gson-2.2.4.jar
+#-libraryjars libs/universal-image-loader-1.8.6.jar
+##-libraryjars libs/volley.jar
+##-libraryjars libs/AndroidHttpServer-1.0.3.jar
+#-libraryjars ext-libs/android-hisi3716Mv300.jar
+#-libraryjars libs/umeng-sdk.jar
+#-libraryjars libs/shenma.jar
+#-libraryjars libs/lisenencoder.jar
 
 -keep public class * extends android.app.Activity
 -keep public class * extends android.app.Application
@@ -102,3 +102,15 @@
 
 -dontwarn org.apache.commons.fileupload.**
 -keep class org.apache.commons.fileupload.** {*;}
+
+-dontwarn org.xwalk.core.**
+-keep class org.xwalk.core.** {*;}
+
+-dontwarn butterknife.internal.**
+-keep class butterknife.internal.** {*;}
+
+-dontwarn org.chromium.**
+-keep class org.chromium.** {*;}
+
+#-downwarn butterknife.internal.**
+#-keep class butterknife.internal.** {*;}

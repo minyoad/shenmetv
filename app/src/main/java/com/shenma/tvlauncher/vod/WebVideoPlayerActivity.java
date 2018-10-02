@@ -20,6 +20,8 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
     private static final String TAG = "WebVideoPlayerActivity";
 
     private static final int ENDING_LENGTH = 120; //120 seconds default
+    private static final int STARTING_LENGTH = 120; //120 seconds default
+
     private ArrayList<VideoInfo> videoInfoList;
     private String vodname;
     private String albumPic;
@@ -75,13 +77,17 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
             album.setAlbumType(vodtype);
             album.setAlbumTitle(vodname);
             album.setAlbumState("");
-            album.setNextLink("");
+            album.setNextLink(videoInfo.url);
             album.setTypeId(2);//记录
         }
 
         String url= VideoList.getProxiedUrl(videoInfo.url);
         play(url,vodname, videoInfo.title);
         isStopping=false;
+
+        if(mLastPos==0){
+            mLastPos=STARTING_LENGTH;
+        }
 
     }
 
