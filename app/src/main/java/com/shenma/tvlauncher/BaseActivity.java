@@ -314,6 +314,5 @@ public abstract class BaseActivity extends FragmentActivity {
 	protected double screenSize;
 	protected Toast mToast = null;
 	protected AudioManager mAudioManager = null;
-	//protected static String exit = "亲！感谢您支持神马视频，诚邀您参与用户体验改进计划，做一款你喜欢的视频聚合！意见反馈QQ群：375132069"; 
-	protected static String exit = "亲爱的小伙伴们！为了保证您更好的观看体验，请及时升级到最新版本！感谢您的支持！意见反馈QQ群：375132069"; 
+	protected static String exit = "为了保证您更好的观看体验，请及时升级到最新版本，感谢您的支持！";
 }
