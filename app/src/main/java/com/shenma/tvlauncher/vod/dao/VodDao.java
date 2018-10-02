@@ -103,7 +103,7 @@ public class VodDao {
 	
 	/**
 	 * 删除指定条件的记录 条件为空则全部删除
-	 * @param where
+	 * @param
 	 */
 	public void deleteAllByWhere(int typeId){
 		String where = "typeId="+typeId;

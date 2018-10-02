@@ -60,11 +60,15 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
 //        vodname=videoInfo.title;
 
         videoLength=0;
+        mLastPos=0;
 
         List<Album> albums=dao.queryAlbumById(videoId,2);
         if (albums.size()>0){
             album=albums.get(0);
-            mLastPos=album.getCollectionTime();
+
+            if(album.getPlayIndex()==playIndex){
+                mLastPos=album.getCollectionTime();
+            }
         }
         else {
 
@@ -81,13 +85,14 @@ public class WebVideoPlayerActivity extends XwalkWebViewActivity {
             album.setTypeId(2);//记录
         }
 
-        String url= VideoList.getProxiedUrl(videoInfo.url);
-        play(url,vodname, videoInfo.title);
         isStopping=false;
 
-        if(mLastPos==0){
+        if(mLastPos==0 && vodtype.equalsIgnoreCase("电视剧")){
             mLastPos=STARTING_LENGTH;
         }
+
+        String url= VideoList.getProxiedUrl(videoInfo.url);
+        play(url,vodname, videoInfo.title);
 
     }
 
