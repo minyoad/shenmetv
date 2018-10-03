@@ -3,7 +3,10 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         config {
-            storeFile file('E:/myproject/shenmatv1/shenma.jks')
+            storeFile file('E:/myproject/shenmatv1/shenmatv.jks')
+            keyAlias 'key0'
+            keyPassword 'iRG81BV3jS1h'
+            storePassword 'uw3GlHbAkA9V'
         }
     }
     compileSdkVersion 21
@@ -12,7 +15,8 @@ android {
         applicationId "com.shenma.tvlauncher"
         minSdkVersion 15
         targetSdkVersion 21
-        versionName '1.4'
+        versionName '1.4.2'
+        signingConfig signingConfigs.config
     }
     buildTypes {
         release {
