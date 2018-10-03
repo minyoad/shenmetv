@@ -51,7 +51,12 @@
   public static final android.os.Parcelable$Creator *;
 }
 
+-keepattributes Annotation
+
 -keepattributes Signature
+
+-keepattributes JavascriptInterface
+
 
 #-keep class com.shenma.tvlauncher.network.**{*;}
 
@@ -112,5 +117,9 @@
 -dontwarn org.chromium.**
 -keep class org.chromium.** {*;}
 
+
+-keepclassmembers class * {
+@org.xwalk.core.JavascriptInterface <methods>;
+}
 #-downwarn butterknife.internal.**
 #-keep class butterknife.internal.** {*;}
