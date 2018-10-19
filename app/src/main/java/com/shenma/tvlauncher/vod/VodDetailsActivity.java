@@ -240,7 +240,7 @@ public class VodDetailsActivity extends Activity {
 				}
 				if(null!=videoinfo&&videoinfo.size()>0){
 					Intent intent = null;
-					intent = new Intent(VodDetailsActivity.this,WebVideoPlayerActivity.class);
+					intent = new Intent(VodDetailsActivity.this,VideoPlayerActivity.class);
 //					if(null!=domain && domain.contains("pps")||domain.contains("qiyi")){
 //						intent = new Intent(VodDetailsActivity.this,MeidaActivity.class);
 //					}else{
@@ -307,7 +307,7 @@ public class VodDetailsActivity extends Activity {
 //					}else{
 //						intent = new Intent(VodDetailsActivity.this,VideoPlayerActivity.class);
 //					}		
-					intent = new Intent(VodDetailsActivity.this,WebVideoPlayerActivity.class);
+					intent = new Intent(VodDetailsActivity.this,VideoPlayerActivity.class);
 					intent.putParcelableArrayListExtra("videoinfo",videoinfo);//数据集合
 					intent.putExtra("albumPic",albumPic);//图片路径
 					intent.putExtra("vodtype", vodtype);//影片类型
@@ -525,6 +525,11 @@ public class VodDetailsActivity extends Activity {
 				rb.setButtonDrawable(R.drawable.detailsource_bg_s);
 				rb.setPadding(0, 0, 0, 0);
 				rb.setTag(playSrc);
+
+//				if(playSrc.contains("m3u8")){
+//					rb.setBackgroundResource(R.drawable.source_other_selector);
+//				}
+
 				switch (playSrc.toLowerCase()){
 					case "letv":
 						rb.setBackgroundResource(R.drawable.source_letv_selector);

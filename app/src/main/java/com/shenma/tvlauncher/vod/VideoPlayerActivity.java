@@ -224,15 +224,33 @@ public class VideoPlayerActivity extends Activity implements OnClickListener {
 			if (vodtype.equals("MOVIE")&&videoInfo.size()==1) {
 				tv_mv_name.setText(vodname);
 			} else {
-				tv_mv_name.setText(videoInfo.get(playIndex).title);
+				vodname=videoInfo.get(playIndex).title;
+				tv_mv_name.setText(vodname);
 			}
 			url = videoInfo.get(postion).url;
-			final String vodUrl = Constant.URL_HEAD + "domain=" + domain + "&url="
-					+ url;
-			Logger.v(TAG, "vodUrl==" + vodUrl);
-			loadMediaFromXml(vodUrl);
+//			final String vodUrl = Constant.URL_HEAD + "domain=" + domain + "&url="+ url;
+//			Logger.v(TAG, "vodUrl==" + vodUrl);
+//			loadMediaFromXml(vodUrl);
+
+//			mediaHandler.sendEmptyMessage(WindowMessageID.DATA_PREPARE_OK);
+
+			if(url!=null){
+				playUrl(url);
+			}
+
+
 		}
 
+	}
+
+	private void playUrl(String url){
+		Message msg = new Message();
+		VodUrl vodurl = new VodUrl();
+		vodurl.setUrl(url);
+		vodurl.setTitle(vodname);
+		msg.obj = vodurl;
+		msg.what = WindowMessageID.DATA_BASE64_PREPARE_OK;
+		mediaHandler.sendMessage(msg);
 	}
 
 	/**
@@ -263,6 +281,7 @@ public class VideoPlayerActivity extends Activity implements OnClickListener {
 		if(domain.contains("qiyi") || domain.contains("pps")){
 			isaiqiyi = true;
 		}
+		onCreateMenu();
 		PrepareVodData(playIndex);
 	}
 
@@ -1288,7 +1307,7 @@ public class VideoPlayerActivity extends Activity implements OnClickListener {
 					//清晰度
 					case 1:
 						menutype = 1;
-						menulist.setAdapter(new VodMenuAdapter(VideoPlayerActivity.this, medialist, 1,isMenuItemShow));
+						menulist.setAdapter(new VodMenuAdapter(VideoPlayerActivity.this, VideoPlayUtils.getData(1), 1,isMenuItemShow));
 						break;
 					//解码
 					case 2:
@@ -1328,14 +1347,14 @@ public class VideoPlayerActivity extends Activity implements OnClickListener {
 						break;
 					//清晰度
 					case 1:
-						isPause = true;
-						if(mVV.isPlaying()){
-							mLastPos = mVV.getCurrentPosition();
-						}
-						if(mPlayerStatus != PLAYER_STATUS.PLAYER_IDLE){
-							mVV.stopPlayback();
-						}
-						qxdposition = position;
+//						isPause = true;
+//						if(mVV.isPlaying()){
+//							mLastPos = mVV.getCurrentPosition();
+//						}
+//						if(mPlayerStatus != PLAYER_STATUS.PLAYER_IDLE){
+//							mVV.stopPlayback();
+//						}
+//						qxdposition = position;
 						hideMenu();
 //						if(mEventHandler.hasMessages(WindowMessageID.EVENT_PLAY))
 //							mEventHandler.removeMessages(WindowMessageID.EVENT_PLAY);

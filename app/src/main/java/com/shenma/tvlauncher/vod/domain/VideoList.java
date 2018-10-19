@@ -54,6 +54,11 @@ public class VideoList implements Serializable{
 		for (int i = 0; i< mPlaySrcList.size(); i++){
 			String name= mPlaySrcList.get(i);
 
+			if(!name.contains("m3u8")){
+				continue;
+			}
+
+
 			String urlStr=urlList[i];
 
 			String[] NameUrls=urlStr.split("\\r");

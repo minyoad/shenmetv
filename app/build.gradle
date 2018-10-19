@@ -10,7 +10,7 @@ android {
         }
     }
     compileSdkVersion 21
-    buildToolsVersion "27.0.3"
+//    buildToolsVersion "27.0.3"
     defaultConfig {
         applicationId "com.shenma.tvlauncher"
         minSdkVersion 15
@@ -26,6 +26,7 @@ android {
     }
     productFlavors {
     }
+    buildToolsVersion '27.0.3'
 }
 
 dependencies {
