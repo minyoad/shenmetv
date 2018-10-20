@@ -47,7 +47,17 @@ public class VideoList implements Serializable{
 
 	private void parseUrl(String vod_play,String vodUrl){
 		String[] playNameList=vod_play.split("\\$\\$\\$");
-		mPlaySrcList = Arrays.asList(playNameList);
+
+
+		mPlaySrcList=new ArrayList<>();
+		for (String playname:playNameList ) {
+			if(playname.contains("m3u8")){
+				mPlaySrcList.add(playname);
+			}
+
+		}
+//		mPlaySrcList = Arrays.asList(playNameList);
+
 
 		String[] urlList=vodUrl.split("\\$\\$\\$");
 

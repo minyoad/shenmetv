@@ -15,7 +15,7 @@ android {
         applicationId "com.shenma.tvlauncher"
         minSdkVersion 15
         targetSdkVersion 21
-        versionName '1.5.0'
+        versionName '1.5.2'
         signingConfig signingConfigs.config
     }
     buildTypes {
