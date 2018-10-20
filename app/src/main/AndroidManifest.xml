@@ -160,7 +160,6 @@
             android:name="com.shenma.tvlauncher.TopicActivity"
             android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape" />
-        <activity android:name=".vod.WebVideoPlayerActivity" />
 
         <meta-data
             android:name="UMENG_APPKEY"
