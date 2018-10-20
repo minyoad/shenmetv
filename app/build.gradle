@@ -15,7 +15,7 @@ android {
         applicationId "com.shenma.tvlauncher"
         minSdkVersion 15
         targetSdkVersion 21
-        versionName '1.4.2'
+        versionName '1.5.0'
         signingConfig signingConfigs.config
     }
     buildTypes {
@@ -26,7 +26,14 @@ android {
     }
     productFlavors {
     }
-    buildToolsVersion '27.0.3'
+
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
+//    buildToolsVersion '27.0.3'
 }
 
 dependencies {
