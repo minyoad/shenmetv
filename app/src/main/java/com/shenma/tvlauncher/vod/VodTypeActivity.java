@@ -580,8 +580,10 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
                 } else if (error instanceof ParseError) {
                     tv_type_details_sum.setText("共0部");
                     pageindex = 2;
-                    vodtypeAdapter.vodDatas.clear();
-                    vodtypeAdapter.notifyDataSetChanged();
+                    if(vodtypeAdapter!=null &&vodtypeAdapter.vodDatas!=null) {
+                        vodtypeAdapter.vodDatas.clear();
+                        vodtypeAdapter.notifyDataSetChanged();
+                    }
                     Utils.showToast(context, "亲，没有搜索到相关内容！", R.drawable.toast_err);
                     Logger.e("joychang", "ParseError=" + error.toString());
                 } else if (error instanceof AuthFailureError) {
@@ -783,7 +785,7 @@ public class VodTypeActivity extends Activity implements OnItemClickListener {
     private TextView tv_type_details_sum, tv_filter_year;
     private ImageView b_type_details_fliter;
     private GridView gv_type_details_grid;
-    private final static int PAGESIZE = 20;
+    private final static int PAGESIZE = 30;
     private int pageindex = 1;
     private int vodpageindex;
     private int totalpage;
